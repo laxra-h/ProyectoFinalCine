@@ -41,7 +41,7 @@
 
                 <Label styleClass="titulo-marca" text="¿Cómo deseas ingresar?" />
 
-                <Button fx:id="btnCliente" contentDisplay="LEFT" maxWidth="Infinity" onAction="#abrirLoginCliente" prefHeight="105.0" styleClass="role-card">
+                <Button fx:id="btnCliente" contentDisplay="LEFT" maxWidth="Infinity" onAction="#abrirOpcionesCliente" prefHeight="105.0" styleClass="role-card">
 
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">

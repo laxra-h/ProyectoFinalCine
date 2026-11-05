@@ -76,7 +76,7 @@
 .linea-dorada {
     -fx-background-color: -fx-cu-acento;
     -fx-pref-height: 2px;
-    -fx-max-width: 60px;
+    -fx-max-width: 400px;
 }
 
 /*Tarjetas roles*/
@@ -186,4 +186,39 @@
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 10px 14px;
+}
+
+.login-container {
+    -fx-background-color: linear-gradient(to bottom right, #271016, #110C0E);
+    -fx-background-radius: 18px;
+    -fx-padding: 45px 75px;
+}
+
+.form-label {
+    -fx-text-fill: #D9B26F;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.login-input {
+    -fx-background-color: #1C1417;
+    -fx-text-fill: #F3E9DC;
+    -fx-prompt-text-fill: #A89A94;
+    -fx-border-color: #3A2A2F;
+    -fx-border-radius: 9px;
+    -fx-background-radius: 9px;
+    -fx-padding: 10px 14px;
+    -fx-font-size: 14px;
+}
+
+.login-input:focused {
+    -fx-border-color: #D9B26F;
+    -fx-border-width: 1.5px;
+}
+
+.mensaje-error {
+    -fx-text-fill: #E36B6B;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-min-height: 18px;
 }
