@@ -1,0 +1,189 @@
+
+.root {
+    -fx-cu-fondo: #110C0E;
+    -fx-cu-panel: #1C1417;
+    -fx-cu-panel-hover: #271C20;
+    -fx-cu-primario: #B3263E;
+    -fx-cu-primario-hover: #CC3049;
+    -fx-cu-acento: #D9B26F;
+    -fx-cu-texto: #F3E9DC;
+    -fx-cu-texto-sec: #A89A94;
+    -fx-cu-borde: #3A2A2F;
+
+    -fx-background-color: -fx-cu-fondo;
+    -fx-font-family: "Segoe UI", "Inter", "Arial";
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: -fx-cu-texto;
+}
+
+/*tipografria*/
+
+.titulo-marca {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.titulo-grande {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 44px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.subtitulo {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
+
+.texto-sec {
+    -fx-text-fill: -fx-cu-texto-sec;
+    -fx-font-size: 12px;
+}
+
+/*Panel portada*/
+
+.portada {
+    -fx-background-color: linear-gradient(to bottom right, #3A1520, #110C0E);
+}
+
+.portada-overlay {
+    -fx-background-color: linear-gradient(
+            to top,
+            rgba(17,12,14,0.97) 0%,
+            rgba(17,12,14,0.35) 55%,
+            rgba(17,12,14,0.10) 100%
+    );
+}
+
+.portada-frase {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 26px;
+    -fx-font-style: italic;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.portada-detalle {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+/*Separadorrrr*/
+
+.linea-dorada {
+    -fx-background-color: -fx-cu-acento;
+    -fx-pref-height: 2px;
+    -fx-max-width: 60px;
+}
+
+/*Tarjetas roles*/
+
+.role-card {
+    -fx-background-color: -fx-cu-panel;
+    -fx-background-radius: 16px;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 18px 22px;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.role-card:hover {
+    -fx-background-color: -fx-cu-panel-hover;
+    -fx-border-color: -fx-cu-acento;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(217,178,111,0.25), 18, 0.1, 0, 4);
+}
+
+.role-icono {
+    -fx-background-color: #781C2D;
+    -fx-background-radius: 14px;
+    -fx-min-width: 54px;
+    -fx-min-height: 54px;
+    -fx-max-width: 54px;
+    -fx-max-height: 54px;
+    -fx-alignment: CENTER;
+}
+
+.role-icono-texto {
+    -fx-font-size: 24px;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.role-titulo {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.role-desc {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
+
+.role-flecha {
+    -fx-font-size: 22px;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+/*botones*/
+
+.btn-primary {
+    -fx-background-color: -fx-cu-primario;
+    -fx-text-fill: -fx-cu-texto;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 22px;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -fx-cu-primario-hover;
+}
+
+.btn-acento {
+    -fx-background-color: -fx-cu-acento;
+    -fx-text-fill: #1A1208;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 22px;
+    -fx-cursor: hand;
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-cu-texto-sec;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 22px;
+    -fx-cursor: hand;
+}
+
+.btn-ghost:hover {
+    -fx-text-fill: -fx-cu-texto;
+    -fx-border-color: -fx-cu-acento;
+}
+
+/*tarjetas y campos*/
+
+.card {
+    -fx-background-color: -fx-cu-panel;
+    -fx-background-radius: 16px;
+    -fx-padding: 20px;
+}
+
+.text-field, .password-field {
+    -fx-background-color: -fx-cu-panel;
+    -fx-text-fill: -fx-cu-texto;
+    -fx-prompt-text-fill: -fx-cu-texto-sec;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 14px;
+}
