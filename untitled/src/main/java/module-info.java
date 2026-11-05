@@ -1,0 +1,14 @@
+module untitled {
+
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires java.desktop;
+    requires java.logging;
+    requires org.junit.jupiter.api;
+
+    opens org.example to javafx.fxml;
+    opens org.example.viewController to javafx.fxml;
+    opens org.example.model;
+
+    exports org.example;
+}
