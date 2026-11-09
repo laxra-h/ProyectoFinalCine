@@ -11,4 +11,6 @@ module untitled {
     opens org.example.model;
 
     exports org.example;
+    opens org.example.model.usuarios;
+    opens org.example.model.pelicula;
 }
