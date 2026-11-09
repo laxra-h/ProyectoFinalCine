@@ -217,8 +217,14 @@
 }
 
 .mensaje-error {
-    -fx-text-fill: #E36B6B;
+    -fx-text-fill: #ff3636;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-min-height: 18px;
+}
+
+.mensaje-exito {
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
