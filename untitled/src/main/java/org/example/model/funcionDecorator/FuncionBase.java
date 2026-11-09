@@ -6,20 +6,29 @@ import java.time.LocalTime;
 
 public class FuncionBase implements Funcion {
 
+    private String codigo;
     private LocalDate fecha;
     private LocalTime hora;
     private final int DESCUENTO_SEMANA = 40;
     private final double COSTO = 20000;
+    private EstadoFuncion estado;
+
 
     /**
-     * Metodo constuctor para la funcion base
+     * Metodo constructor de la funcionBase
+     * @param codigo
      * @param fecha
      * @param hora
+     * @param estado
      */
-    public FuncionBase(LocalDate fecha, LocalTime hora) {
+    public FuncionBase(String codigo, LocalDate fecha, LocalTime hora, EstadoFuncion estado) {
+        this.codigo = codigo;
         this.fecha = fecha;
         this.hora = hora;
+        this.estado = estado;
     }
+
+
 
     /**
      * Metodo para calcular el costo de la funcion base si es fin de semana o dia entre semana
