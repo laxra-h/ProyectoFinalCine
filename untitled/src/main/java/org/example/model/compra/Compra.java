@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.compra;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,7 @@ public class Compra {
     private LocalDate fechaCompra;
     private double total;
     private int puntosCompra;
+    private Reembolso theReembolso;
   //  private EstrategiaReembolso estrategiaReembolso;
 
     /**
