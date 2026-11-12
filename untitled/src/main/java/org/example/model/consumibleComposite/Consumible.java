@@ -2,6 +2,10 @@ package org.example.model.consumibleComposite;
 
 public interface Consumible {
 
+    public String getNombre();
+
+    public String getDescripcion();
+
     /**
      * Metodo para definir como se calcula el costo de un consumible
      */
