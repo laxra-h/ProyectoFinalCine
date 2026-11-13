@@ -1,13 +1,13 @@
 package org.example.model.usuarios;
 
-import javafx.util.Builder;
-
 import java.time.LocalDate;
+
 
 public class Cliente extends Usuario {
 
     private LocalDate fechaNacimiento;
     private int puntos;
+    private TarjetaVirtual theTarjeta;
 
 
     /**
@@ -90,5 +90,13 @@ public class Cliente extends Usuario {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public TarjetaVirtual getTheTarjeta() {
+        return theTarjeta;
+    }
+
+    public void setTheTarjeta(TarjetaVirtual theTarjeta) {
+        this.theTarjeta = theTarjeta;
     }
 }
