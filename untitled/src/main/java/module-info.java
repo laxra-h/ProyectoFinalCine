@@ -14,4 +14,5 @@ module untitled {
     opens org.example.model.usuarios;
     opens org.example.model.pelicula;
     opens org.example.model.compra;
+    opens org.example.model.tarjeta;
 }

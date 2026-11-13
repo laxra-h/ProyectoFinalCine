@@ -1,11 +1,14 @@
 package org.example.model.usuarios;
 
+import org.example.model.tarjeta.TarjetaVirtual;
+
 import java.time.LocalDate;
 
 public class Cliente extends Usuario {
 
     private LocalDate fechaNacimiento;
     private int puntos;
+    private TarjetaVirtual tarjetaVirtual;
 
 
     /**
@@ -22,6 +25,7 @@ public class Cliente extends Usuario {
         super(id, nombre, telefono, email, contrasenia);
         this.fechaNacimiento = fechaNacimiento;
         this.puntos = puntos;
+        this.tarjetaVirtual = new TarjetaVirtual("TV-" + id, 0);
     }
 
 
@@ -29,6 +33,30 @@ public class Cliente extends Usuario {
         super(builder.id, builder.nombre, builder.telefono, builder.email, builder.contrasenia);
         this.fechaNacimiento = builder.fechaNacimiento;
         this.puntos = builder.puntos;
+        this.tarjetaVirtual = new TarjetaVirtual("TV-" + builder.id, 0);
+    }
+
+    /**
+     * Acumula puntos directamente al cliente
+     * @param cantidadPuntos
+     */
+    public void acumularPuntos(int cantidadPuntos) {
+        if (cantidadPuntos > 0) {
+            this.puntos += cantidadPuntos;
+        }
+    }
+
+    /**
+     * Redime puntos si el cliente cuenta con saldo suficiente
+     * @param puntosARedimir
+     * @return true si se pudieron redimir los puntos
+     */
+    public boolean redimirPuntos(int puntosARedimir) {
+        if (puntosARedimir <= 0 || this.puntos < puntosARedimir) {
+            return false;
+        }
+        this.puntos -= puntosARedimir;
+        return true;
     }
 
     public static class Builder {
@@ -89,5 +117,13 @@ public class Cliente extends Usuario {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public TarjetaVirtual getTarjetaVirtual() {
+        return tarjetaVirtual;
+    }
+
+    public void setTarjetaVirtual(TarjetaVirtual tarjetaVirtual) {
+        this.tarjetaVirtual = tarjetaVirtual;
     }
 }
