@@ -1,6 +1,13 @@
 package org.example.model.funcionDecorator;
 
-public abstract class DecoratorFuncion implements Funcion{
+import org.example.model.pelicula.Pelicula;
+import org.example.model.salaPrototype.Asiento;
+import org.example.model.salaPrototype.Sala;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public abstract class DecoratorFuncion implements Funcion {
 
     protected final Funcion funcion;
 
@@ -15,5 +22,45 @@ public abstract class DecoratorFuncion implements Funcion{
 
     public Funcion getFuncion() {
         return funcion;
+    }
+
+    @Override
+    public String getCodigo() {
+        return funcion.getCodigo();
+    }
+
+    @Override
+    public Pelicula getPelicula() {
+        return funcion.getPelicula();
+    }
+
+    @Override
+    public Sala getSala() {
+        return funcion.getSala();
+    }
+
+    @Override
+    public Asiento[] getAsientos() {
+        return funcion.getAsientos();
+    }
+
+    @Override
+    public LocalDate getFecha() {
+        return funcion.getFecha();
+    }
+
+    @Override
+    public LocalTime getHora() {
+        return funcion.getHora();
+    }
+
+    @Override
+    public EstadoFuncion getEstado() {
+        return funcion.getEstado();
+    }
+
+    @Override
+    public void setEstado(EstadoFuncion estado) {
+        funcion.setEstado(estado);
     }
 }

@@ -29,12 +29,12 @@
             </font></Label>
 
             <VBox maxWidth="Infinity" spacing="9.0">
-                <Label style="-fx-font-size: 16;" styleClass="form-label" text="Usuario">
+                <Label style="-fx-font-size: 16;" styleClass="form-label" text="Identificación">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
 
-                <TextField fx:id="txtUsuario" prefHeight="45.0" promptText="Ingresa tu usuario" styleClass="login-input" />
+                <TextField fx:id="txtUsuario" prefHeight="45.0" promptText="Ingresa tu identificación" styleClass="login-input" />
             </VBox>
 
             <VBox maxWidth="Infinity" spacing="9.0">

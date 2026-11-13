@@ -8,7 +8,7 @@ public class Compra {
     private LocalDate fechaCompra;
     private double total;
     private int puntosCompra;
-    private Reembolso theReembolso;
+  //  private Reembolso theReembolso;
   //  private EstrategiaReembolso estrategiaReembolso;
 
     /**

@@ -76,8 +76,6 @@ public class Cliente extends Usuario {
         }
 
 
-
-
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
