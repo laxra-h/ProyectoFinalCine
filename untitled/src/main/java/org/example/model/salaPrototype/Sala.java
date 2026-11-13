@@ -34,7 +34,7 @@ public class Sala {
                 Asiento nuevoAsiento = asientoBase.clone();
 
                 nuevoAsiento.setFila((char) ('A' + i));
-                nuevoAsiento.setNumero(j);
+                nuevoAsiento.setNumero((char)j);
                 nuevoAsiento.setDisponible(true);
 
                 listAsientos[posicion] = nuevoAsiento;
@@ -44,25 +44,6 @@ public class Sala {
         }
     }
 
-    /**
-     * Clona el arreglo de asientos de la sala para asignarlo de forma independiente a una funcion
-     * @return arreglo de asientos clonados
-     */
-    public Asiento[] clonarAsientosParaFuncion() {
-        try {
-            if (listAsientos[0] == null) {
-                creacionAsientos();
-            }
-            Asiento[] copia = new Asiento[listAsientos.length];
-            for (int i = 0; i < listAsientos.length; i++) {
-                copia[i] = listAsientos[i].clone();
-                copia[i].setDisponible(true);
-            }
-            return copia;
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Error al clonar los asientos de la sala", e);
-        }
-    }
 
     public String getNumeroSala() {
         return numeroSala;
