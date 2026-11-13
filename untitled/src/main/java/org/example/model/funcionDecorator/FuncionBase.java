@@ -6,6 +6,7 @@ import org.example.model.salaPrototype.Sala;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class FuncionBase implements Funcion {
@@ -13,9 +14,7 @@ public class FuncionBase implements Funcion {
     private String codigo;
     private Pelicula pelicula;
     private Sala sala;
-    private Asiento[] asientos;
-    private LocalDate fecha;
-    private LocalTime hora;
+    private LocalDateTime fecha;
     private final int DESCUENTO_SEMANA = 40;
     private final double COSTO = 20000;
     private EstadoFuncion estado;
@@ -25,14 +24,10 @@ public class FuncionBase implements Funcion {
      * Metodo constructor de la funcionBase
      * @param codigo
      * @param fecha
-     * @param hora
-     * @param estado
      */
-    public FuncionBase(String codigo, LocalDate fecha, LocalTime hora, EstadoFuncion estado) {
+    public FuncionBase(String codigo, LocalDateTime fecha) {
         this.codigo = codigo;
         this.fecha = fecha;
-        this.hora = hora;
-        this.estado = estado;
     }
 
     /**
@@ -41,16 +36,13 @@ public class FuncionBase implements Funcion {
      * @param pelicula
      * @param sala
      * @param fecha
-     * @param hora
      * @param estado
      */
-    public FuncionBase(String codigo, Pelicula pelicula, Sala sala, LocalDate fecha, LocalTime hora, EstadoFuncion estado) {
+    public FuncionBase(String codigo, Pelicula pelicula, Sala sala, LocalDateTime fecha, EstadoFuncion estado) {
         this.codigo = codigo;
         this.pelicula = pelicula;
         this.sala = sala;
-        this.asientos = sala != null ? sala.clonarAsientosParaFuncion() : null;
         this.fecha = fecha;
-        this.hora = hora;
         this.estado = estado;
     }
 
@@ -62,7 +54,7 @@ public class FuncionBase implements Funcion {
      */
     @Override
     public double calcularCosto() {
-        DayOfWeek dia = (this.fecha != null ? this.fecha : LocalDate.now()).getDayOfWeek();
+        DayOfWeek dia = (this.fecha != null ? this.fecha : LocalDateTime.now()).getDayOfWeek();
         if (dia == DayOfWeek.SATURDAY || dia == DayOfWeek.SUNDAY) {
             return COSTO;
         } else {
@@ -78,7 +70,25 @@ public class FuncionBase implements Funcion {
         return (COSTO * DESCUENTO_SEMANA) / 100;
     }
 
-    @Override
+    /**
+     * Metodo para resetear los asientos
+     */
+    public void resetAsientos() {
+
+            for (Asiento asiento : sala.getListAsientos()) {
+                asiento.setDisponible(true);
+            }
+    }
+
+
+
+
+
+
+
+
+
+
     public String getCodigo() {
         return codigo;
     }
@@ -87,7 +97,6 @@ public class FuncionBase implements Funcion {
         this.codigo = codigo;
     }
 
-    @Override
     public Pelicula getPelicula() {
         return pelicula;
     }
@@ -96,48 +105,39 @@ public class FuncionBase implements Funcion {
         this.pelicula = pelicula;
     }
 
-    @Override
     public Sala getSala() {
         return sala;
     }
 
     public void setSala(Sala sala) {
         this.sala = sala;
-        if (sala != null && this.asientos == null) {
-            this.asientos = sala.clonarAsientosParaFuncion();
-        }
     }
 
-    @Override
-    public Asiento[] getAsientos() {
-        return asientos;
-    }
 
-    @Override
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    @Override
-    public LocalTime getHora() {
-        return hora;
+    public int getDESCUENTO_SEMANA() {
+        return DESCUENTO_SEMANA;
     }
 
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
+    public double getCOSTO() {
+        return COSTO;
     }
 
-    @Override
     public EstadoFuncion getEstado() {
         return estado;
     }
 
-    @Override
     public void setEstado(EstadoFuncion estado) {
         this.estado = estado;
+        if (estado == EstadoFuncion.FINALIZADA) {
+            resetAsientos();
+        }
     }
 }
