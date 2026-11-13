@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="680.0" maxWidth="1100.0" prefHeight="680.0" prefWidth="1100.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.PanelAdministradorViewController">
+
+    <left>
+        <VBox prefWidth="260.0" spacing="10.0" styleClass="menu-lateral">
+            <padding>
+                <Insets bottom="20.0" left="18.0" right="18.0" top="20.0" />
+            </padding>
+
+            <children>
+
+                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="223.0">
+                    <children>
+                        <Label prefHeight="30.0" prefWidth="33.0" style="-fx-font-size: 25;" styleClass="titulo-marca" text="🎬" />
+
+                        <Label prefWidth="100.0" styleClass="titulo-marca" text="CINEMA UQ" />
+                    </children>
+                </HBox>
+
+                <VBox spacing="7.0">
+                    <children>
+
+                        <ToggleButton fx:id="btnPeliculas" maxHeight="52.0" minHeight="52.0" onAction="#mostrarPeliculas" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="🎥" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Películas" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnSalas" maxHeight="52.0" minHeight="52.0" onAction="#mostrarSalas" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="💺" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Salas y más" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnFunciones" maxHeight="52.0" minHeight="52.0" onAction="#mostrarFunciones" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="🕒" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Funciones" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnProductos" maxHeight="52.0" minHeight="52.0" onAction="#mostrarProductos" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="🍔" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Confitería" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnPromociones" maxHeight="52.0" minHeight="52.0" onAction="#mostrarPromociones" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="\%" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Promociones" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnClientes" maxHeight="52.0" minHeight="52.0" onAction="#mostrarClientes" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="👥" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Clientes" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnCompras" maxHeight="52.0" minHeight="52.0" onAction="#mostrarCompras" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="🛍" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Compras" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnRecargas" maxHeight="52.0" minHeight="52.0" onAction="#mostrarRecargas" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="💳" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Recargas" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                        <ToggleButton fx:id="btnReportes" maxHeight="52.0" minHeight="52.0" onAction="#mostrarReportes" prefWidth="200.0">
+                            <graphic>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <children>
+                                        <StackPane styleClass="role-icono-menuA">
+                                            <Label styleClass="role-icono-texto" text="📊" />
+                                        </StackPane>
+                                        <Label style="-fx-font-size: 15;" styleClass="role-titulo" text="Reportes" />
+                                    </children>
+                                </HBox>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="role-card" />
+                                <String fx:value="role-card-menu" />
+                            </styleClass>
+                        </ToggleButton>
+
+                    </children>
+                </VBox>
+
+                <VBox VBox.vgrow="ALWAYS" />
+
+                <Button fx:id="btnCerrarSesion" maxWidth="200.0" onAction="#cerrarSesion" style="-fx-font-size: 15;" styleClass="btn-ghost" text="Cerrar sesión" />
+
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contenidoDinamico" styleClass="panel-contenido">
+
+            <children>
+
+                <VBox fx:id="vistaBienvenida" alignment="CENTER" prefHeight="680.0" prefWidth="821.0" spacing="20.0" styleClass="bienvenida-cliente">
+
+                    <children>
+
+                        <Label fx:id="lblBienvenida" styleClass="titulo-grande" text="BIENVENIDO" />
+
+                        <Label style="-fx-font-size: 22;" styleClass="portada-frase" text="Administra los servicios y operaciones de CinemaUQ" wrapText="true" />
+
+                        <Pane />
+
+                    </children>
+                </VBox>
+
+            </children>
+        </StackPane>
+    </center>
+
+</BorderPane>
