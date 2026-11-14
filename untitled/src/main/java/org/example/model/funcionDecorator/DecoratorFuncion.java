@@ -5,6 +5,7 @@ import org.example.model.salaPrototype.Asiento;
 import org.example.model.salaPrototype.Sala;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public abstract class DecoratorFuncion implements Funcion {
@@ -23,6 +24,7 @@ public abstract class DecoratorFuncion implements Funcion {
     public Funcion getFuncion() {
         return funcion;
     }
+
 
     @Override
     public String getCodigo() {
@@ -45,13 +47,8 @@ public abstract class DecoratorFuncion implements Funcion {
     }
 
     @Override
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return funcion.getFecha();
-    }
-
-    @Override
-    public LocalTime getHora() {
-        return funcion.getHora();
     }
 
     @Override

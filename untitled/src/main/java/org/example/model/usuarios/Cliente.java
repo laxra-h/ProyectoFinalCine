@@ -1,90 +1,61 @@
 package org.example.model.usuarios;
 
-import org.example.model.tarjeta.TarjetaVirtual;
-
 import java.time.LocalDate;
+
 
 public class Cliente extends Usuario {
 
     private LocalDate fechaNacimiento;
     private int puntos;
-    private TarjetaVirtual tarjetaVirtual;
+    private TarjetaVirtual theTarjeta;
 
 
     /**
-     * Metodo constructor del cliente
-     * @param id
-     * @param nombre
-     * @param telefono
-     * @param email
-     * @param contrasenia
-     * @param fechaNacimiento
-     * @param puntos
+     * Metodo para construir el Cliente (constructor)
+     * @param builder
      */
-    public Cliente(String id, String nombre, String telefono, String email, String contrasenia, LocalDate fechaNacimiento, int puntos) {
-        super(id, nombre, telefono, email, contrasenia);
-        this.fechaNacimiento = fechaNacimiento;
-        this.puntos = puntos;
-        this.tarjetaVirtual = new TarjetaVirtual("TV-" + id, 0);
-    }
-
-
-    private Cliente(Builder builder) {
+    public Cliente(Builder builder) {
         super(builder.id, builder.nombre, builder.telefono, builder.email, builder.contrasenia);
         this.fechaNacimiento = builder.fechaNacimiento;
         this.puntos = builder.puntos;
-        this.tarjetaVirtual = new TarjetaVirtual("TV-" + builder.id, 0);
     }
+
 
     /**
-     * Acumula puntos directamente al cliente
-     * @param cantidadPuntos
+     * Clase Builder
      */
-    public void acumularPuntos(int cantidadPuntos) {
-        if (cantidadPuntos > 0) {
-            this.puntos += cantidadPuntos;
-        }
-    }
-
-    /**
-     * Redime puntos si el cliente cuenta con saldo suficiente
-     * @param puntosARedimir
-     * @return true si se pudieron redimir los puntos
-     */
-    public boolean redimirPuntos(int puntosARedimir) {
-        if (puntosARedimir <= 0 || this.puntos < puntosARedimir) {
-            return false;
-        }
-        this.puntos -= puntosARedimir;
-        return true;
-    }
-
     public static class Builder {
-        private String id;
-        private String nombre;
-        private String telefono = "";
-        private String email = "";
-        private String contrasenia;
+
+        private final String id;
+        private final String nombre;
+        private final String contrasenia;
+
+        private String telefono;
+        private String email;
         private LocalDate fechaNacimiento;
         private int puntos = 0;
 
-        public Builder(String id, String nombre) {
+        /**
+         * Metodo para los atributos obligatorios
+         * @param id
+         * @param nombre
+         * @param contrasenia
+         * @param puntos
+         */
+        public Builder(String id, String nombre, String contrasenia, int puntos) {
             this.id = id;
             this.nombre = nombre;
+            this.contrasenia = contrasenia;
+            this.puntos = puntos;
         }
 
-        public Builder telefono(String telefono) {
+        public Builder telefono(String  telefono) {
             this.telefono = telefono;
             return this;
         }
 
-        public Builder email(String email) {
+        public Builder email(String  email) {
             this.email = email;
-            return this;
-        }
-
-        public Builder contrasenia(String contrasenia) {
-            this.contrasenia = contrasenia;
             return this;
         }
 
@@ -93,15 +64,17 @@ public class Cliente extends Usuario {
             return this;
         }
 
-        public Builder puntos(int puntos) {
-            this.puntos = puntos;
-            return this;
-        }
 
+        /**
+         * Metodo que construye el cliente
+         * @return
+         */
         public Cliente build() {
             return new Cliente(this);
         }
-    }
+
+        }
+
 
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
@@ -119,11 +92,11 @@ public class Cliente extends Usuario {
         this.puntos = puntos;
     }
 
-    public TarjetaVirtual getTarjetaVirtual() {
-        return tarjetaVirtual;
+    public TarjetaVirtual getTheTarjeta() {
+        return theTarjeta;
     }
 
-    public void setTarjetaVirtual(TarjetaVirtual tarjetaVirtual) {
-        this.tarjetaVirtual = tarjetaVirtual;
+    public void setTheTarjeta(TarjetaVirtual theTarjeta) {
+        this.theTarjeta = theTarjeta;
     }
 }
