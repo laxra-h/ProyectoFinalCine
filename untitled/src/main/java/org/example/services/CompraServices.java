@@ -83,6 +83,7 @@ public class CompraServices {
             cliente.setPuntos(cliente.getPuntos() - cambiarPuntos(compra));
             cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() - descontarPuntosCompra(compra));
             cambiarDisponibilidadAsiento(compra);
+            compra.pagar();
             return "!Compra exitosa!";
         }
         return "Lo sentimos, ha ocurrido un error en su compra";

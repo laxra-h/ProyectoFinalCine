@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
 import org.example.model.salaPrototype.Sala;
@@ -29,4 +30,14 @@ public interface Funcion {
     public EstadoFuncion getEstado();
 
     public void setEstado(EstadoFuncion estado);
+
+    public void cancelar();
+
+    public void agregarObservador(Observador observador);
+
+    public void eliminarObservador(Observador observador);
+
+    public void notificar();
+
+    public void notificar(String mensaje);
 }

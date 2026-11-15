@@ -1,6 +1,8 @@
 package org.example.model.compra;
 
 import org.example.model.Ticket;
+import org.example.model.compra.estadoCompra.EstadoCompra;
+import org.example.model.compra.estadoCompra.EstadoPendiente;
 import org.example.model.compra.estrategiaReembolso.EstrategiaReembolso;
 import org.example.model.compra.estrategiaReembolso.ReembolsoCompleto;
 import org.example.model.compra.estrategiaReembolso.ReembolsoParcial;
@@ -11,6 +13,7 @@ import org.example.model.usuarios.Cliente;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
@@ -21,7 +24,7 @@ public class Compra {
     private int puntosCompra;
     private boolean usaPuntos;
     private Cliente theCliente;
-    private Validador theValidador;
+    private EstadoCompra theEstadoCompra;
     private EstrategiaReembolso theEstrategiaReembolso;
     private List<Ticket> listaTickets;
     private List<Consumible> listConsumibles;
@@ -40,6 +43,31 @@ public class Compra {
         this.total = total;
         this.puntosCompra = puntosCompra;
         this.usaPuntos = false;
+        this.theEstadoCompra = new EstadoPendiente();
+        this.listaTickets = new ArrayList<>();
+        this.listConsumibles = new ArrayList<>();
+    }
+
+    /**
+     * Metodo para cambiar el estado de la compra (Patron State)
+     * @param estadoCompra
+     */
+    public void cambiarEstado(EstadoCompra estadoCompra) {
+        this.theEstadoCompra = estadoCompra;
+    }
+
+    /**
+     * Metodo para pagar la compra delegando al estado actual (Patron State)
+     */
+    public void pagar() {
+        this.theEstadoCompra.pagar(this);
+    }
+
+    /**
+     * Metodo para cancelar la compra delegando al estado actual (Patron State)
+     */
+    public void cancelar() {
+        this.theEstadoCompra.cancelar(this);
     }
 
 
@@ -57,9 +85,9 @@ public class Compra {
 
         int horasFaltantes = (int) Duration.between(fechaCancelacion, fechaFuncion).toHours();
 
-        if(horasFaltantes <= 24){
+        if(horasFaltantes > 24){
             theEstrategiaReembolso = new ReembolsoCompleto();
-        }else if( horasFaltantes < 24 && horasFaltantes > 2){
+        }else if( horasFaltantes <= 24 && horasFaltantes >= 2){
             theEstrategiaReembolso = new ReembolsoParcial();
         }else {
             theEstrategiaReembolso = new SinReembolso();
@@ -90,19 +118,29 @@ public class Compra {
         }
 
     /**
-     * Metodo para asignar el cliente a la compra
+     * Metodo para asignar el cliente a la compra y suscribirlo a las funciones de sus tickets
      * @param cliente
      */
     public void asignarCliente (Cliente cliente){
         this.theCliente = cliente;
+        if (cliente != null && listaTickets != null) {
+            for (Ticket ticket : listaTickets) {
+                if (ticket.getTheFuncion() != null) {
+                    ticket.getTheFuncion().agregarObservador(cliente);
+                }
+            }
+        }
     }
 
     /**
-     * Metodo para agregar un ticket a la compra
+     * Metodo para agregar un ticket a la compra y suscribir al cliente como observador de la funcion
      * @param ticket
      */
     public void addTicket(Ticket ticket){
         listaTickets.add(ticket);
+        if (theCliente != null && ticket != null && ticket.getTheFuncion() != null) {
+            ticket.getTheFuncion().agregarObservador(theCliente);
+        }
     }
 
     /**
@@ -161,28 +199,12 @@ public class Compra {
         this.theCliente = theCliente;
     }
 
-    public Validador getTheValidador() {
-        return theValidador;
+    public EstadoCompra getTheEstadoCompra() {
+        return theEstadoCompra;
     }
 
-    public void setTheValidador(Validador theValidador) {
-        this.theValidador = theValidador;
-    }
-
-    public DetalleCompra getTheDetalleCompra() {
-        return theDetalleCompra;
-    }
-
-    public void setTheDetalleCompra(DetalleCompra theDetalleCompra) {
-        this.theDetalleCompra = theDetalleCompra;
-    }
-
-    public Reembolso getTheReembolso() {
-        return theReembolso;
-    }
-
-    public void setTheReembolso(Reembolso theReembolso) {
-        this.theReembolso = theReembolso;
+    public void setTheEstadoCompra(EstadoCompra theEstadoCompra) {
+        this.theEstadoCompra = theEstadoCompra;
     }
 
     public List<Ticket> getListaTickets() {

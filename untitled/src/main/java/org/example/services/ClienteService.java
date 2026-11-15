@@ -19,7 +19,16 @@ public class ClienteService {
         return c.calcularTotalReembolso();
     }
 
-    public void
+    /**
+     * Metodo para cancelar una compra gestionando su estado con el patron State
+     * @param codigoCompra
+     */
+    public void cancelarCompra(String codigoCompra) {
+        Compra c = buscarCompra(codigoCompra);
+        if (c != null) {
+            c.cancelar();
+        }
+    }
 
 
     /**

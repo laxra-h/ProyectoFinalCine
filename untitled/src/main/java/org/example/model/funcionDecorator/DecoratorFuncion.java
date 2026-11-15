@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
 import org.example.model.salaPrototype.Sala;
@@ -42,11 +43,6 @@ public abstract class DecoratorFuncion implements Funcion {
     }
 
     @Override
-    public Asiento[] getAsientos() {
-        return funcion.getAsientos();
-    }
-
-    @Override
     public LocalDateTime getFecha() {
         return funcion.getFecha();
     }
@@ -59,5 +55,30 @@ public abstract class DecoratorFuncion implements Funcion {
     @Override
     public void setEstado(EstadoFuncion estado) {
         funcion.setEstado(estado);
+    }
+
+    @Override
+    public void cancelar() {
+        funcion.cancelar();
+    }
+
+    @Override
+    public void agregarObservador(Observador observador) {
+        funcion.agregarObservador(observador);
+    }
+
+    @Override
+    public void eliminarObservador(Observador observador) {
+        funcion.eliminarObservador(observador);
+    }
+
+    @Override
+    public void notificar() {
+        funcion.notificar();
+    }
+
+    @Override
+    public void notificar(String mensaje) {
+        funcion.notificar(mensaje);
     }
 }

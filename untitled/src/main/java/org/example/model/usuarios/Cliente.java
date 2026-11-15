@@ -1,13 +1,18 @@
 package org.example.model.usuarios;
 
+import org.example.model.observer.Observador;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Observador {
 
     private LocalDate fechaNacimiento;
     private int puntos;
     private TarjetaVirtual theTarjeta;
+    private List<String> listNotificaciones;
 
 
     /**
@@ -18,6 +23,16 @@ public class Cliente extends Usuario {
         super(builder.id, builder.nombre, builder.telefono, builder.email, builder.contrasenia);
         this.fechaNacimiento = builder.fechaNacimiento;
         this.puntos = builder.puntos;
+        this.listNotificaciones = new ArrayList<>();
+    }
+
+    /**
+     * Metodo del patron Observer para recibir notificaciones de funciones o compras
+     * @param mensaje
+     */
+    @Override
+    public void actualizar(String mensaje) {
+        this.listNotificaciones.add(mensaje);
     }
 
 
@@ -98,5 +113,13 @@ public class Cliente extends Usuario {
 
     public void setTheTarjeta(TarjetaVirtual theTarjeta) {
         this.theTarjeta = theTarjeta;
+    }
+
+    public List<String> getListNotificaciones() {
+        return listNotificaciones;
+    }
+
+    public void setListNotificaciones(List<String> listNotificaciones) {
+        this.listNotificaciones = listNotificaciones;
     }
 }
