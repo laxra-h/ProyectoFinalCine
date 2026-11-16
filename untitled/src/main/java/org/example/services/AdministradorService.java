@@ -4,6 +4,7 @@ import org.example.model.Cine;
 import org.example.model.compra.Compra;
 import org.example.model.funcionDecorator.EstadoFuncion;
 import org.example.model.funcionDecorator.Funcion;
+import org.example.model.usuarios.Cliente;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +25,24 @@ public class AdministradorService {
     funcion.notificar("El estado de la funcion " + funcion.getCodigo() + ", ha sido cambiada a " + estado);
 }
 
+    /**
+     * Metodo para recargar tarjeta
+     * @param monto
+     * @param id
+     */
+    public void recargarTarjeta(double monto, String  id){
+        Cliente c = buscarCLiente(id);
+        c.getTheTarjeta().setSaldo(c.getTheTarjeta().getSaldo() + monto);
+}
+
+public Cliente buscarCLiente(String id){
+        for (Cliente c: cine.getListClientes()){
+            if (c.getId().equals(id)){
+                return c;
+            }
+        }
+        return null;
+}
 
     /**
      * Metodo para consultar compras por una fecha estadistica
