@@ -1,8 +1,11 @@
 package org.example.model;
 
+import org.example.model.consumibleComposite.Consumible;
 import org.example.model.funcionDecorator.Funcion;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Consumible {
 
     private String codigo;
     private double precio;
@@ -13,12 +16,11 @@ public class Ticket {
     /**
      * Metodo constructor para el ticket
      * @param codigo
-     * @param precio
      * @param codigoAsiento
      */
-    public Ticket(String codigo, double precio, String codigoAsiento) {
+    public Ticket(String codigo, String codigoAsiento) {
         this.codigo = codigo;
-        this.precio = precio;
+        this.precio = theFuncion.calcularCosto();
         this.codigoAsiento = codigoAsiento;
     }
 
@@ -53,5 +55,25 @@ public class Ticket {
 
     public void setCodigoAsiento(String codigoAsiento) {
         this.codigoAsiento = codigoAsiento;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.codigo;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "";
+    }
+
+    @Override
+    public double calcularCosto() {
+        return theFuncion.calcularCosto();
+    }
+
+    @Override
+    public int calcularPuntos() {
+        return theFuncion.getPuntosRedmidos();
     }
 }

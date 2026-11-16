@@ -1,5 +1,6 @@
 package org.example.model.usuarios;
 
+import org.example.model.compra.Compra;
 import org.example.model.observer.Observador;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class Cliente extends Usuario implements Observador {
     private int puntos;
     private TarjetaVirtual theTarjeta;
     private List<String> listNotificaciones;
+    private List<Compra> listCompras;
 
 
     /**
@@ -23,7 +25,9 @@ public class Cliente extends Usuario implements Observador {
         super(builder.id, builder.nombre, builder.telefono, builder.email, builder.contrasenia);
         this.fechaNacimiento = builder.fechaNacimiento;
         this.puntos = builder.puntos;
+        this.theTarjeta = new TarjetaVirtual(id, 0);
         this.listNotificaciones = new ArrayList<>();
+        this.listCompras = new ArrayList<>();
     }
 
     /**
@@ -88,6 +92,8 @@ public class Cliente extends Usuario implements Observador {
             return new Cliente(this);
         }
 
+
+
         }
 
 
@@ -121,5 +127,13 @@ public class Cliente extends Usuario implements Observador {
 
     public void setListNotificaciones(List<String> listNotificaciones) {
         this.listNotificaciones = listNotificaciones;
+    }
+
+    public List<Compra> getListCompras() {
+        return listCompras;
+    }
+
+    public void setListCompras(List<Compra> listCompras) {
+        this.listCompras = listCompras;
     }
 }
