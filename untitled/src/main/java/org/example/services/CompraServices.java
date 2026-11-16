@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.model.Cine;
 import org.example.model.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.compra.estrategiaReembolso.EstrategiaReembolso;
@@ -8,6 +9,7 @@ import org.example.model.compra.estrategiaReembolso.ReembolsoParcial;
 import org.example.model.compra.estrategiaReembolso.SinReembolso;
 import org.example.model.consumibleComposite.Consumible;
 import org.example.model.salaPrototype.Asiento;
+import org.example.model.salaPrototype.Sala;
 import org.example.model.usuarios.Cliente;
 
 import java.time.Duration;
@@ -15,7 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class CompraServices {
-    int valorCambio = 200;
+    Cine cine = Cine.getInstance();
+    public final int valorCambio = 200;
 
     /**
      * Metodo para ver cual es la mayor cantidad de puntos que se pueden descontar
@@ -48,7 +51,6 @@ public class CompraServices {
      * @return
      */
     public double descontarPuntosCompra(Compra compra) {
-        Cliente cliente = compra.getTheCliente();
         return compra.calcularTotal() - cambiarPuntos(compra);
     }
 
@@ -82,8 +84,11 @@ public class CompraServices {
         if (verificarSaldo(compra)) {
             cliente.setPuntos(cliente.getPuntos() - cambiarPuntos(compra));
             cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() - descontarPuntosCompra(compra));
+            cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
             cambiarDisponibilidadAsiento(compra);
+            compra.asignarCliente(cliente);
             compra.pagar();
+            cliente.actualizar("Se ha realizado una compra por el valor de: " + compra.calcularTotal());
             return "!Compra exitosa!";
         }
         return "Lo sentimos, ha ocurrido un error en su compra";
@@ -107,6 +112,37 @@ public class CompraServices {
 
     }
 
+    /**
+     * Metodo para realizar el reembolso en la tarjeta vitual del cliente
+     * @param cliente
+     * @param codigoCompra
+     */
+    public void realizarReembolso(Cliente cliente, String codigoCompra) {
+
+        Compra compra = null;
+        for (Compra c : cine.getListCompras()) {
+            if (c.getCodigo().equals(codigoCompra)) {
+                compra = c;
+            }
+        }
+        compra.definirEstrategiaReembolso();
+        double devolucion = compra.getTheEstrategiaReembolso().calcularReembolso(compra.getTotal());
+        cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() + devolucion);
+
+
+    }
+
+
+
+    public Asiento buscarAsiento(String codigoBuscar, Sala sala) {
+        for (Asiento a : sala.getListAsientos()) {
+             if (a.getCodigo().equals(codigoBuscar)) {
+                 return a;
+             }
+
+        }
+         return null;
+    }
 
 
 }
