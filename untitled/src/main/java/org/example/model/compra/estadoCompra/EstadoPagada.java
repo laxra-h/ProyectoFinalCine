@@ -32,7 +32,7 @@ public class EstadoPagada implements EstadoCompra {
             if (compra.getListaTickets().get(0).getTheFuncion().getEstado() == EstadoFuncion.CANCELADA) {
                 compra.setTheEstrategiaReembolso(new ReembolsoCompleto());
             } else {
-                compra.definirEstrategiaReembolso(compra);
+                compra.definirEstrategiaReembolso();
             }
 
             if (compra.getTheEstrategiaReembolso() instanceof SinReembolso) {

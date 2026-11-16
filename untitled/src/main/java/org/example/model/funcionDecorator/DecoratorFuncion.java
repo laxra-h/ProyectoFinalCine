@@ -8,6 +8,7 @@ import org.example.model.salaPrototype.Sala;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public abstract class DecoratorFuncion implements Funcion {
 
@@ -81,4 +82,11 @@ public abstract class DecoratorFuncion implements Funcion {
     public void notificar(String mensaje) {
         funcion.notificar(mensaje);
     }
+
+    @Override
+    public List<Observador> getListObservadores() {
+        return funcion.getListObservadores();
+    }
+
+
 }

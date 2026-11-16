@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.model.Ticket;
 import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
@@ -20,7 +21,9 @@ public class FuncionBase implements Funcion {
     private LocalDateTime fecha;
     private final int DESCUENTO_SEMANA = 40;
     private final double COSTO = 20000;
+    private int puntosRedimidos;
     private EstadoFuncion estado;
+    private List<Ticket> listaTickets;
     private List<Observador> listObservadores;
 
 
@@ -29,10 +32,12 @@ public class FuncionBase implements Funcion {
      * @param codigo
      * @param fecha
      */
-    public FuncionBase(String codigo, LocalDateTime fecha) {
+    public FuncionBase(String codigo, LocalDateTime fecha, int puntosRedimidos) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.estado = EstadoFuncion.PROGRAMADA;
+        this.puntosRedimidos = puntosRedimidos;
+        this.listaTickets = new ArrayList<>();
         this.listObservadores = new ArrayList<>();
     }
 
@@ -87,14 +92,68 @@ public class FuncionBase implements Funcion {
             }
     }
 
+    /**
+     * Metodo para cancelar la funcion y notificar a los observadores
+     */
+    @Override
+    public void cancelar() {
+        setEstado(EstadoFuncion.CANCELADA);
+    }
+
+    /**
+     * Metodo para suscribir un observador a la funcion
+     * @param observador
+     */
+    @Override
+    public void agregarObservador(Observador observador) {
+        if (observador != null && !listObservadores.contains(observador)) {
+            listObservadores.add(observador);
+        }
+    }
+
+    /**
+     * Metodo para eliminar un observador de la funcion
+     * @param observador
+     */
+    @Override
+    public void eliminarObservador(Observador observador) {
+        listObservadores.remove(observador);
+    }
+
+    /**
+     * Metodo para notificar a todos los observadores suscritos sobre el cambio de estado
+     */
+    @Override
+    public void notificar() {
+        String nombrePelicula = (pelicula != null) ? pelicula.getNombre() : codigo;
+        String mensaje = "La función " + codigo + " (" + nombrePelicula + ") cambió su estado a: " + estado;
+        notificar(mensaje);
+    }
+
+    /**
+     * Metodo para enviar un mensaje especifico a todos los observadores suscritos
+     * @param mensaje
+     */
+    @Override
+    public void notificar(String mensaje) {
+        for (Observador observador : listObservadores) {
+            observador.actualizar(mensaje);
+        }
+    }
+
+    @Override
+    public int getPuntosRedmidos() {
+        return puntosRedimidos;
+    }
 
 
+    public List<Ticket> getListaTickets() {
+        return listaTickets;
+    }
 
-
-
-
-
-
+    public void setListaTickets(List<Ticket> listaTickets) {
+        this.listaTickets = listaTickets;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -149,53 +208,9 @@ public class FuncionBase implements Funcion {
         notificar();
     }
 
-    /**
-     * Metodo para cancelar la funcion y notificar a los observadores
-     */
-    @Override
-    public void cancelar() {
-        setEstado(EstadoFuncion.CANCELADA);
-    }
 
-    /**
-     * Metodo para suscribir un observador a la funcion
-     * @param observador
-     */
-    @Override
-    public void agregarObservador(Observador observador) {
-        if (observador != null && !listObservadores.contains(observador)) {
-            listObservadores.add(observador);
-        }
-    }
-
-    /**
-     * Metodo para eliminar un observador de la funcion
-     * @param observador
-     */
-    @Override
-    public void eliminarObservador(Observador observador) {
-        listObservadores.remove(observador);
-    }
-
-    /**
-     * Metodo para notificar a todos los observadores suscritos sobre el cambio de estado
-     */
-    @Override
-    public void notificar() {
-        String nombrePelicula = (pelicula != null) ? pelicula.getNombre() : codigo;
-        String mensaje = "La función " + codigo + " (" + nombrePelicula + ") cambió su estado a: " + estado;
-        notificar(mensaje);
-    }
-
-    /**
-     * Metodo para enviar un mensaje especifico a todos los observadores suscritos
-     * @param mensaje
-     */
-    @Override
-    public void notificar(String mensaje) {
-        for (Observador observador : listObservadores) {
-            observador.actualizar(mensaje);
-        }
+    public void setPuntosRedimidos(int puntosRedimidos) {
+        this.puntosRedimidos = puntosRedimidos;
     }
 
     public List<Observador> getListObservadores() {

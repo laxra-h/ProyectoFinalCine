@@ -8,6 +8,7 @@ import org.example.model.compra.estrategiaReembolso.ReembolsoCompleto;
 import org.example.model.compra.estrategiaReembolso.ReembolsoParcial;
 import org.example.model.compra.estrategiaReembolso.SinReembolso;
 import org.example.model.consumibleComposite.Consumible;
+import org.example.model.salaPrototype.Asiento;
 import org.example.model.usuarios.Cliente;
 
 import java.time.Duration;
@@ -73,15 +74,14 @@ public class Compra {
 
     /**
      * Metodo para definir la estrategia de Reembolso
-     * @param compra
      * @return
      */
 
-    public void definirEstrategiaReembolso(Compra compra){
+    public void definirEstrategiaReembolso(){
 
         LocalDateTime fechaCancelacion = LocalDateTime.now();
 
-        LocalDateTime fechaFuncion = compra.getListaTickets().get(0).getTheFuncion().getFecha();
+        LocalDateTime fechaFuncion = listaTickets.get(0).getTheFuncion().getFecha();
 
         int horasFaltantes = (int) Duration.between(fechaCancelacion, fechaFuncion).toHours();
 
@@ -130,6 +130,21 @@ public class Compra {
                 }
             }
         }
+    }
+
+    /**
+     * Metodo para calcular puntos
+     * @return
+     */
+    public int calcularPuntosCompra(){
+        int total = 0;
+        for(Ticket ticket : listaTickets){
+            total += ticket.calcularPuntos();
+        }
+        for (Consumible consumible : listConsumibles) {
+            total += consumible.calcularPuntos();
+        }
+        return total;
     }
 
     /**
@@ -230,6 +245,7 @@ public class Compra {
     public void setTheEstrategiaReembolso(EstrategiaReembolso theEstrategiaReembolso) {
         this.theEstrategiaReembolso = theEstrategiaReembolso;
     }
+
 
     public List<Consumible> getListConsumibles() {
         return listConsumibles;
