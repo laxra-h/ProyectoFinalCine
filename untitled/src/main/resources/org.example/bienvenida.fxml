@@ -12,17 +12,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1100.0" styleClass="root" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.BienvenidaViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="root" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.BienvenidaViewController">
 
     <children>
 
         <HBox prefHeight="680.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-            <StackPane maxWidth="385.0" minWidth="385.0" prefWidth="385.0" styleClass="portada-imagen">
+            <StackPane maxWidth="485.0" minWidth="385.0" prefWidth="485.0" styleClass="portada-imagen">
 
-                <ImageView fx:id="imgPortada" fitHeight="680.0" fitWidth="385.0" preserveRatio="false" smooth="true">
+                <ImageView fx:id="imgPortada" fitHeight="800.0" fitWidth="485.0" preserveRatio="false" smooth="true">
                     <image>
-                        <Image url="@teatroo.jpg" />
+                        <Image url="@teatroo_.jpg" />
                     </image>
                 </ImageView>
 
@@ -34,12 +34,12 @@
                     <Insets bottom="35.0" left="65.0" right="65.0" top="45.0" />
                 </padding>
 
-                <Label style="-fx-font-size: 55px;" styleClass="titulo-grande" text="CINEMA UQ" />
+                <Label style="-fx-font-size: 65px;" styleClass="titulo-grande" text="CINEMA UQ" />
             <Separator maxWidth="402.0" prefHeight="0.0" prefWidth="402.0" style="-fx-background-color: #FFCE21;" />
 
-                <Label style="-fx-font-size: 38px;" styleClass="titulo-grande" text="BIENVENIDOS" />
+                <Label style="-fx-font-size: 48px;" styleClass="titulo-grande" text="BIENVENIDOS" />
 
-                <Label styleClass="titulo-marca" text="¿Cómo deseas ingresar?" />
+                <Label style="-fx-font-size: 20;" styleClass="titulo-marca" text="¿Cómo deseas ingresar?" />
 
                 <Button fx:id="btnCliente" contentDisplay="LEFT" maxWidth="Infinity" onAction="#abrirOpcionesCliente" prefHeight="105.0" styleClass="role-card">
 
@@ -54,7 +54,7 @@
 
                             <VBox alignment="CENTER_LEFT" spacing="7.0">
 
-                                <Label prefHeight="32.0" prefWidth="110.0" style="-fx-font-size: 25px;" styleClass="role-titulo" text="Cliente" />
+                                <Label prefHeight="32.0" prefWidth="110.0" style="-fx-font-size: 30px;" styleClass="role-titulo" text="Cliente" />
 
                             </VBox>
 
@@ -76,7 +76,7 @@
 
                             <VBox alignment="CENTER_LEFT" spacing="7.0">
 
-                                <Label style="-fx-font-size: 25px;" styleClass="role-titulo" text="Administrador" />
+                                <Label style="-fx-font-size: 30px;" styleClass="role-titulo" text="Administrador" />
 
                             </VBox>
 
