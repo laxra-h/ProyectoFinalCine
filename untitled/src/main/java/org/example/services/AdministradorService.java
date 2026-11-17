@@ -70,7 +70,7 @@ public Cliente buscarCLiente(String id){
      * @param fechaFin
      * @return
      */
-    public String generarReporteCompras(LocalDate fechaInicio, LocalDate fechaFin) {
+    public String generarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
 
         List<Compra> compras = consultarComprasFecha(fechaInicio, fechaFin);
 
@@ -101,13 +101,6 @@ public Cliente buscarCLiente(String id){
         return "Cantidad de compras: " + compras.size() + "\nTotal de compras: " + ingresosTotales +
                 "\nPromedio de compras: " + promedioCompra + "\nCompra mayor: " + compraMayor.getTotal() + "\nCompra menor: " + compraMenor.getTotal();
 
-
-    }
-
-
-
-    public String generarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
-        List<Compra> listCompras = consultarComprasFecha(fechaInicio, fechaFin);
 
     }
 
