@@ -12,6 +12,7 @@ import org.example.model.pelicula.ClasificacionPelicula;
 import org.example.model.pelicula.GeneroPelicula;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Sala;
+import org.example.model.usuarios.Cliente;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,7 +24,14 @@ public class DatosIniciales {
 
         Cine cine = Cine.getInstance();
 
-        if (!cine.getListPeliculas().isEmpty() || !cine.getListSalas().isEmpty() || !cine.getListFunciones().isEmpty()) {
+        inicializarPeliculas(cine);
+        inicializarSalas(cine);
+        inicializarFunciones(cine);
+    }
+
+    private static void inicializarPeliculas(Cine cine) {
+
+        if (!cine.getListPeliculas().isEmpty()) {
             return;
         }
 
@@ -57,10 +65,30 @@ public class DatosIniciales {
         cine.getListPeliculas().add(conFaldas);
         cine.getListPeliculas().add(casablanca);
         cine.getListPeliculas().add(dracula);
+    }
+
+    private static void inicializarSalas(Cine cine) {
+
+        if (!cine.getListSalas().isEmpty()) {
+            return;
+        }
 
         cine.crearSala("Sala 1");
         cine.crearSala("Sala 2");
         cine.crearSala("Sala 3");
+    }
+
+    private static void inicializarFunciones(Cine cine) {
+
+        if (cine.getListPeliculas().size() < 3 ||
+                cine.getListSalas().size() < 3 ||
+                !cine.getListFunciones().isEmpty()) {
+            return;
+        }
+
+        Pelicula conFaldas = cine.getListPeliculas().get(0);
+        Pelicula casablanca = cine.getListPeliculas().get(1);
+        Pelicula dracula = cine.getListPeliculas().get(2);
 
         Sala sala1 = cine.obtenerSala("Sala 1");
         Sala sala2 = cine.obtenerSala("Sala 2");
@@ -188,6 +216,10 @@ public class DatosIniciales {
 
         Cine cine = Cine.getInstance();
 
+        if (!cine.getListProductos().isEmpty() || !cine.getListCombos().isEmpty()) {
+            return;
+        }
+
         Producto gaseosa = new Producto(
                 "Gaseosa",
                 "Gaseosa personal",
@@ -280,5 +312,50 @@ public class DatosIniciales {
         pro.agregarConsumible(junior);
 
         cine.crearCombo(pro);
+    }
+
+    public static void inicializarClientes() {
+
+        Cine cine = Cine.getInstance();
+
+        if (!cine.getListClientes().isEmpty()) {
+            return;
+        }
+
+        Cliente cliente1 = new Cliente.Builder("0", "Laura Gómez", "0", 0)
+                .telefono("3104567890")
+                .email("laura.gomez@gmail.com")
+                .fechaNacimiento(LocalDate.of(2005, 10, 3))
+                .build();
+
+        Cliente cliente2 = new Cliente.Builder("1002345678", "Andrés Ramírez", "Andres123", 0)
+                .telefono("3125678901")
+                .email("andres.ramirez@gmail.com")
+                .fechaNacimiento(LocalDate.of(2002, 4, 15))
+                .build();
+
+        Cliente cliente3 = new Cliente.Builder("1003456789", "Valentina Torres", "Vale123", 0)
+                .telefono("3156789012")
+                .email("valentina.torres@gmail.com")
+                .fechaNacimiento(LocalDate.of(2003, 8, 22))
+                .build();
+
+        Cliente cliente4 = new Cliente.Builder("1004567890", "Santiago López", "Santi123", 0)
+                .telefono("3007890123")
+                .email("santiago.lopez@gmail.com")
+                .fechaNacimiento(LocalDate.of(2001, 12, 10))
+                .build();
+
+        Cliente cliente5 = new Cliente.Builder("1005678901", "Camila Martínez", "Cami123", 0)
+                .telefono("3188901234")
+                .email("camila.martinez@gmail.com")
+                .fechaNacimiento(LocalDate.of(2004, 6, 18))
+                .build();
+
+        cine.crearCliente(cliente1);
+        cine.crearCliente(cliente2);
+        cine.crearCliente(cliente3);
+        cine.crearCliente(cliente4);
+        cine.crearCliente(cliente5);
     }
 }

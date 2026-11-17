@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.model.usuarios.Cliente;
+import org.example.services.SesionActual;
+import org.example.services.SesionService;
 
 import java.io.IOException;
 
@@ -22,13 +25,14 @@ public class LoginClienteViewController {
     @FXML
     private Label lblMensaje;
 
+    private final SesionService sesionService = new SesionService();
+
     @FXML
     private void initialize() {
 
         txtUsuario.setOnAction(event -> txtContrasena.requestFocus());
 
         txtContrasena.setOnAction(event -> ingresar());
-
     }
 
     @FXML
@@ -56,6 +60,32 @@ public class LoginClienteViewController {
             return;
         }
 
+        Cliente cliente = sesionService.iniciarSesionCliente(usuario, contrasena);
+
+        if (cliente == null) {
+            lblMensaje.setText("Usuario o contraseña incorrectos.");
+            txtContrasena.clear();
+            txtContrasena.requestFocus();
+            return;
+        }
+
+        SesionActual.getInstance().iniciarSesion(cliente);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/panelCliente.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = (Stage) txtUsuario.getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            SesionActual.getInstance().cerrarSesion();
+            lblMensaje.setText("No se pudo abrir el panel del cliente");
+            e.printStackTrace();
+        }
     }
 
     @FXML

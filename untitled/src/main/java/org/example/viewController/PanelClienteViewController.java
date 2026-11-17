@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import org.example.model.usuarios.Cliente;
 import javafx.scene.control.Button;
+import org.example.services.SesionActual;
 
 import java.io.IOException;
 
@@ -70,17 +71,13 @@ public class PanelClienteViewController {
         btnMisCompras.setToggleGroup(grupoMenu);
         btnMiPerfil.setToggleGroup(grupoMenu);
 
-        lblBienvenida.setText("BIENVENIDO/A");
+        clienteActual = SesionActual.getInstance().getClienteActual();
 
-    }
-
-    /**
-     * Recibe el cliente que inicio sesion y lo saluda en la vista de bienvenida
-     * @param clienteActual
-     */
-    public void setClienteActual(Cliente clienteActual) {
-        this.clienteActual = clienteActual;
-        lblBienvenida.setText("BIENVENIDO/A, " + clienteActual.getNombre().toUpperCase());
+        if (clienteActual != null) {
+            lblBienvenida.setText("BIENVENIDO/A, " + clienteActual.getNombre().toUpperCase());
+        } else {
+            lblBienvenida.setText("BIENVENIDO/A");
+        }
     }
 
     @FXML
@@ -115,7 +112,13 @@ public class PanelClienteViewController {
 
     @FXML
     private void mostrarPerfil() {
-        cargarVista("perfil.fxml");
+
+        FXMLLoader loader = cargarVista("perfil.fxml");
+
+        if (loader != null) {
+            PerfilViewController perfilController = loader.getController();
+            perfilController.setCliente(clienteActual);
+        }
     }
 
     private FXMLLoader cargarVista(String fxml) {
@@ -139,6 +142,8 @@ public class PanelClienteViewController {
             );
 
             Parent root = loader.load();
+
+            SesionActual.getInstance().cerrarSesion();
 
             Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
 
