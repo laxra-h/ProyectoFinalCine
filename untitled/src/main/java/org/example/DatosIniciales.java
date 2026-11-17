@@ -20,6 +20,9 @@ import org.example.model.compra.estadoCompra.EstadoPagada;
 import org.example.model.compra.estadoCompra.EstadoCancelada;
 import org.example.model.compra.estadoCompra.EstadoReembolsada;
 import org.example.model.consumibleComposite.Consumible;
+import org.example.model.tarjeta.TarjetaVirtual;
+import org.example.model.compra.estadoCompra.EstadoPagada;
+import org.example.model.compra.estadoCompra.EstadoReembolsada;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -364,6 +367,12 @@ public class DatosIniciales {
         cine.crearCliente(cliente3);
         cine.crearCliente(cliente4);
         cine.crearCliente(cliente5);
+
+        cliente1.getTheTarjeta().setNumeroTarjeta("789024");
+        cliente2.getTheTarjeta().setNumeroTarjeta("654321");
+        cliente3.getTheTarjeta().setNumeroTarjeta("832715");
+        cliente4.getTheTarjeta().setNumeroTarjeta("927461");
+        cliente5.getTheTarjeta().setNumeroTarjeta("518392");
     }
 
     public static void inicializarCompras() {
@@ -605,5 +614,54 @@ public class DatosIniciales {
 
         cliente.getListCompras().add(compra);
         cine.getListCompras().add(compra);
+    }
+
+    public static void inicializarMovimientosTarjetas() {
+
+        Cine cine = Cine.getInstance();
+
+        for (Cliente cliente : cine.getListClientes()) {
+
+            TarjetaVirtual tarjeta = cliente.getTheTarjeta();
+
+            if (tarjeta == null || !tarjeta.getHistorialMovimientos().isEmpty()) {
+                continue;
+            }
+
+            double totalCompras = 0;
+
+            for (Compra compra : cliente.getListCompras()) {
+
+                if (compra.getTheEstadoCompra() instanceof EstadoPagada || compra.getTheEstadoCompra() instanceof EstadoReembolsada) {
+                    totalCompras += compra.getTotal();
+                }
+            }
+
+            double montoRecarga = totalCompras + 50000;
+
+            tarjeta.recargar(montoRecarga);
+
+            for (Compra compra : cliente.getListCompras()) {
+
+                if (compra.getTheEstadoCompra() instanceof EstadoPagada || compra.getTheEstadoCompra() instanceof EstadoReembolsada) {
+
+                    double total = compra.getTotal();
+
+                    boolean pagoRealizado = tarjeta.pagar(
+                            total,
+                            "Compra " + compra.getCodigo()
+                    );
+
+                    if (pagoRealizado &&
+                            compra.getTheEstadoCompra() instanceof EstadoReembolsada) {
+
+                        tarjeta.reembolsar(
+                                total,
+                                "Reembolso de la compra " + compra.getCodigo()
+                        );
+                    }
+                }
+            }
+        }
     }
 }
