@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import org.example.model.usuarios.Cliente;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -50,7 +51,11 @@ public class PanelClienteViewController {
     @FXML
     private Button btnCerrarSesion;
 
+    private static final String RUTA_VISTAS = "/org.example/";
+
     private ToggleGroup grupoMenu;
+
+    private Cliente clienteActual;
 
     @FXML
     private void initialize() {
@@ -69,64 +74,60 @@ public class PanelClienteViewController {
 
     }
 
+    /**
+     * Recibe el cliente que inicio sesion y lo saluda en la vista de bienvenida
+     * @param clienteActual
+     */
+    public void setClienteActual(Cliente clienteActual) {
+        this.clienteActual = clienteActual;
+        lblBienvenida.setText("BIENVENIDO/A, " + clienteActual.getNombre().toUpperCase());
+    }
+
     @FXML
     private void mostrarCartelera() {
-        mostrarSeccion("CARTELERA",
-                "Consulta nuestras películas, sinopsis, clasificaciones y funciones disponibles.");
+        cargarVista("cartelera.fxml");
     }
 
     @FXML
     private void mostrarConfiteria() {
-        mostrarSeccion("CONFITERÍA",
-                "Consulta nuestros productos, precios y combos disponibles.");
+        cargarVista("confiteria.fxml");
     }
 
     @FXML
     private void mostrarCompra() {
-        mostrarSeccion("COMPRAR",
-                "Aquí podrás seleccionar películas, funciones, asientos y productos para realizar tu compra.");
-    }
+        cargarVista("compra.fxml");
+         }
 
     @FXML
     private void mostrarTarjeta() {
-        mostrarSeccion("MI TARJETA",
-                "Consulta el saldo, estado y movimientos de tu tarjeta virtual.");
+        cargarVista("tarjeta.fxml");
     }
 
     @FXML
     private void mostrarPuntos() {
-        mostrarSeccion("MIS PUNTOS",
-                "Consulta tus puntos acumulados, vencimientos y opciones de redención.");
+        cargarVista("puntos.fxml");
     }
 
     @FXML
     private void mostrarCompras() {
-        mostrarSeccion("MIS COMPRAS",
-                "Consulta tu historial de compras y los detalles de tus transacciones.");
+        cargarVista("compras.fxml");
     }
 
     @FXML
     private void mostrarPerfil() {
-        mostrarSeccion("MI PERFIL",
-                "Consulta y actualiza tu información personal.");
+        cargarVista("perfil.fxml");
     }
 
-    private void mostrarSeccion(String titulo, String descripcion) {
-
-        VBox contenido = new VBox(20);
-        contenido.setAlignment(Pos.CENTER);
-
-        Label lblTitulo = new Label(titulo);
-        lblTitulo.getStyleClass().add("titulo-grande");
-
-        Label lblDescripcion = new Label(descripcion);
-        lblDescripcion.getStyleClass().add("portada-frase");
-        lblDescripcion.setWrapText(true);
-        lblDescripcion.setMaxWidth(600);
-
-        contenido.getChildren().addAll(lblTitulo, lblDescripcion);
-
-        contenidoDinamico.getChildren().setAll(contenido);
+    private FXMLLoader cargarVista(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(RUTA_VISTAS + fxml));
+            Parent vista = loader.load();
+            contenidoDinamico.getChildren().setAll(vista);
+            return loader;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @FXML

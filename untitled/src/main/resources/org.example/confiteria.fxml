@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" styleClass="root" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.ConfiteriaViewController">
+    <children>
+
+        <VBox spacing="16.0" styleClass="cartelera-root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+
+                <HBox fx:id="contenedorCombos" maxHeight="550.0" spacing="18.0" VBox.vgrow="ALWAYS">
+                    <children>
+
+                        <VBox fx:id="tarjetaCombo1" maxWidth="Infinity" prefWidth="0.0" spacing="10.0" styleClass="combo-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <Label fx:id="lblNombreCombo1" maxWidth="Infinity" minHeight="28.0" styleClass="combo-nombre" wrapText="true" />
+                                <Label fx:id="lblDescripcionCombo1" alignment="TOP_LEFT" maxHeight="58.0" maxWidth="Infinity" minHeight="58.0" prefHeight="58.0" styleClass="combo-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="INCLUYE" />
+
+                                <!-- Las filas de lo que incluye se agregan desde el controlador -->
+                                <VBox fx:id="incluyeCombo1" spacing="14.0" VBox.vgrow="ALWAYS" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label fx:id="lblPrecioCombo1" styleClass="combo-precio" />
+                                        <Label fx:id="lblPuntosCombo1" styleClass="combo-puntos" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="tarjetaCombo2" maxWidth="Infinity" prefWidth="0.0" spacing="10.0" styleClass="combo-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <Label fx:id="lblNombreCombo2" maxWidth="Infinity" minHeight="28.0" styleClass="combo-nombre" wrapText="true" />
+                                <Label fx:id="lblDescripcionCombo2" alignment="TOP_LEFT" maxHeight="58.0" maxWidth="Infinity" minHeight="58.0" prefHeight="58.0" styleClass="combo-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="INCLUYE" />
+
+                                <VBox fx:id="incluyeCombo2" spacing="14.0" VBox.vgrow="ALWAYS" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label fx:id="lblPrecioCombo2" styleClass="combo-precio" />
+                                        <Label fx:id="lblPuntosCombo2" styleClass="combo-puntos" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="tarjetaCombo3" maxWidth="Infinity" prefWidth="0.0" spacing="10.0" styleClass="combo-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <Label fx:id="lblNombreCombo3" maxWidth="Infinity" minHeight="28.0" styleClass="combo-nombre" wrapText="true" />
+                                <Label fx:id="lblDescripcionCombo3" alignment="TOP_LEFT" maxHeight="58.0" maxWidth="Infinity" minHeight="58.0" prefHeight="58.0" styleClass="combo-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="INCLUYE" />
+
+                                <VBox fx:id="incluyeCombo3" spacing="14.0" VBox.vgrow="ALWAYS" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label fx:id="lblPrecioCombo3" styleClass="combo-precio" />
+                                        <Label fx:id="lblPuntosCombo3" styleClass="combo-puntos" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="tarjetaCombo4" maxWidth="Infinity" prefWidth="0.0" spacing="10.0" styleClass="combo-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <Label fx:id="lblNombreCombo4" maxWidth="Infinity" minHeight="28.0" styleClass="combo-nombre" wrapText="true" />
+                                <Label fx:id="lblDescripcionCombo4" alignment="TOP_LEFT" maxHeight="58.0" maxWidth="Infinity" minHeight="58.0" prefHeight="58.0" styleClass="combo-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="INCLUYE" />
+
+                                <VBox fx:id="incluyeCombo4" spacing="14.0" VBox.vgrow="ALWAYS" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label fx:id="lblPrecioCombo4" styleClass="combo-precio" />
+                                        <Label fx:id="lblPuntosCombo4" styleClass="combo-puntos" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <VBox maxHeight="100.0" minHeight="180.0" spacing="10.0">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="178.0" styleClass="form-label" text="PRODUCTOS INDIVIDUALES" />
+                  <HBox alignment="CENTER" prefHeight="140.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+
+                                <VBox fx:id="fichaProducto1" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto1" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto1" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto1" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="fichaProducto2" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto2" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto2" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto2" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="fichaProducto3" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto3" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto3" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto3" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="fichaProducto4" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto4" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto4" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto4" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="fichaProducto5" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto5" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto5" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto5" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+      
+                                <VBox fx:id="fichaProducto6" prefWidth="165.0" spacing="5.0" styleClass="producto-chip">
+                                    <children>
+                                        <Label fx:id="lblNombreProducto6" styleClass="producto-nombre" />
+                                          <Label fx:id="lblPrecioProducto6" styleClass="producto-precio" />
+                                          <Label fx:id="lblPuntosProducto6" styleClass="producto-detalle" />
+                                    </children>
+                                </VBox>
+                     </children>
+                  </HBox>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>

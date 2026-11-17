@@ -256,3 +256,200 @@
     -fx-max-height: 38px;
     -fx-alignment: CENTER;
 }
+
+/*Cartelera*/
+
+.cartelera-root {
+    -fx-background-color: transparent;
+    -fx-padding: 24px 30px 26px 30px;
+}
+
+.cartelera-card {
+    -fx-background-color: -fx-cu-panel;
+    -fx-background-radius: 16px;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 14px 14px 16px 14px;
+}
+
+.cartelera-card:hover {
+    -fx-border-color: -fx-cu-acento;
+    -fx-effect: dropshadow(gaussian, rgba(217,178,111,0.22), 18, 0.1, 0, 4);
+}
+
+.cartelera-poster {
+    -fx-background-color: linear-gradient(to bottom right, #3A1520, #110C0E);
+    -fx-background-radius: 12px;
+}
+
+.poster-placeholder {
+    -fx-font-size: 56px;
+    -fx-opacity: 0.45;
+}
+
+.badge-clasificacion {
+    -fx-background-color: rgba(17,12,14,0.88);
+    -fx-background-radius: 8px;
+    -fx-border-color: -fx-cu-acento;
+    -fx-border-radius: 8px;
+    -fx-padding: 3px 10px;
+    -fx-text-fill: -fx-cu-acento;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.pelicula-titulo {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.pelicula-meta {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
+
+.pelicula-descripcion {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: -fx-cu-texto;
+    -fx-line-spacing: 2px;
+}
+
+.separador-cartelera {
+    -fx-background-color: -fx-cu-borde;
+    -fx-min-height: 1px;
+    -fx-pref-height: 1px;
+    -fx-max-height: 1px;
+}
+
+.funcion-item {
+    -fx-background-color: -fx-cu-panel-hover;
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 10px;
+    -fx-padding: 7px 12px;
+}
+
+.funcion-item:hover {
+    -fx-border-color: -fx-cu-acento;
+}
+
+.funcion-dia {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.funcion-hora {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.funcion-formato {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+    -fx-border-color: -fx-cu-acento;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 1px 7px;
+}
+
+.formato-3d {
+    -fx-background-color: rgba(217,178,111,0.15);
+}
+
+.formato-4d {
+    -fx-background-color: -fx-cu-primario;
+    -fx-border-color: -fx-cu-primario;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.funcion-precio {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
+
+/* Confitería */
+
+.combo-card {
+    -fx-background-color: -fx-cu-panel;
+    -fx-background-radius: 14px;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 18px;
+}
+
+.combo-card:hover {
+    -fx-background-color: -fx-cu-panel-hover;
+    -fx-border-color: -fx-cu-acento;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(217,178,111,0.18),
+            14, 0.1, 0, 3
+    );
+}
+
+.combo-nombre {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.combo-descripcion {
+    -fx-font-size: 20px;
+    -fx-text-fill: -fx-cu-texto-sec;
+    -fx-line-spacing: 2px;
+}
+
+.combo-item {
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.combo-precio {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.combo-puntos {
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
+
+.producto-chip {
+    -fx-background-color: -fx-cu-panel;
+    -fx-background-radius: 10px;
+    -fx-border-color: -fx-cu-borde;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px;
+}
+
+.producto-chip:hover {
+    -fx-background-color: -fx-cu-panel-hover;
+    -fx-border-color: -fx-cu-acento;
+}
+
+.producto-nombre {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-texto;
+}
+
+.producto-precio {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cu-acento;
+}
+
+.producto-detalle {
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-cu-texto-sec;
+}
