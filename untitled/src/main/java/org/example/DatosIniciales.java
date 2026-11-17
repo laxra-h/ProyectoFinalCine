@@ -13,6 +13,13 @@ import org.example.model.pelicula.GeneroPelicula;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Sala;
 import org.example.model.usuarios.Cliente;
+import org.example.model.Ticket;
+import org.example.model.compra.Compra;
+import org.example.model.compra.estadoCompra.EstadoCompra;
+import org.example.model.compra.estadoCompra.EstadoPagada;
+import org.example.model.compra.estadoCompra.EstadoCancelada;
+import org.example.model.compra.estadoCompra.EstadoReembolsada;
+import org.example.model.consumibleComposite.Consumible;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -357,5 +364,246 @@ public class DatosIniciales {
         cine.crearCliente(cliente3);
         cine.crearCliente(cliente4);
         cine.crearCliente(cliente5);
+    }
+
+    public static void inicializarCompras() {
+
+        Cine cine = Cine.getInstance();
+
+        if (!cine.getListCompras().isEmpty()) {
+            return;
+        }
+
+        if (cine.getListClientes().size() < 5 ||
+                cine.getListPeliculas().size() < 3 ||
+                cine.getListSalas().size() < 3 ||
+                cine.getListProductos().isEmpty() ||
+                cine.getListCombos().isEmpty()) {
+            return;
+        }
+
+        Cliente laura = cine.getListClientes().get(0);
+        Cliente andres = cine.getListClientes().get(1);
+        Cliente valentina = cine.getListClientes().get(2);
+        Cliente santiago = cine.getListClientes().get(3);
+        Cliente camila = cine.getListClientes().get(4);
+
+        Pelicula conFaldas = cine.getListPeliculas().get(0);
+        Pelicula casablanca = cine.getListPeliculas().get(1);
+        Pelicula dracula = cine.getListPeliculas().get(2);
+
+        Sala sala1 = cine.obtenerSala("Sala 1");
+        Sala sala2 = cine.obtenerSala("Sala 2");
+        Sala sala3 = cine.obtenerSala("Sala 3");
+
+        LocalDate hoy = LocalDate.now();
+        LocalDate ayer = hoy.minusDays(1);
+        LocalDate manana = hoy.plusDays(1);
+
+        Funcion funcionLaura = crearFuncion(
+                "R001", conFaldas, sala1,
+                manana.plusDays(1).atTime(12, 0),
+                EstadoFuncion.PROGRAMADA, "NORMAL"
+        );
+
+        Funcion funcionAndres = crearFuncion(
+                "R002", casablanca, sala2,
+                manana.atTime(18, 0),
+                EstadoFuncion.PROGRAMADA, "3D"
+        );
+
+        Funcion funcionValentina = crearFuncion(
+                "R003", dracula, sala3,
+                manana.atTime(11, 30),
+                EstadoFuncion.PROGRAMADA, "4D"
+        );
+
+        Funcion funcionSantiago = crearFuncion(
+                "R004", conFaldas, sala2,
+                manana.plusDays(1).atTime(15, 0),
+                EstadoFuncion.PROGRAMADA, "3D"
+        );
+
+        Funcion funcionCamila = crearFuncion(
+                "R005", casablanca, sala3,
+                manana.atTime(16, 0),
+                EstadoFuncion.PROGRAMADA, "NORMAL"
+        );
+
+        Funcion funcionLaura2 = crearFuncion(
+                "H001", conFaldas, sala1,
+                ayer.atTime(16, 0),
+                EstadoFuncion.FINALIZADA, "NORMAL"
+        );
+
+        Funcion funcionAndres2 = crearFuncion(
+                "H002", casablanca, sala2,
+                ayer.atTime(18, 0),
+                EstadoFuncion.FINALIZADA, "3D"
+        );
+
+        Funcion funcionValentina2 = crearFuncion(
+                "H003", dracula, sala3,
+                manana.atTime(19, 0),
+                EstadoFuncion.PROGRAMADA, "4D"
+        );
+
+        Funcion funcionSantiago2 = crearFuncion(
+                "H004", conFaldas, sala1,
+                ayer.atTime(20, 0),
+                EstadoFuncion.FINALIZADA, "NORMAL"
+        );
+
+        Funcion funcionCamila2 = crearFuncion(
+                "H005", casablanca, sala2,
+                ayer.atTime(21, 0),
+                EstadoFuncion.FINALIZADA, "3D"
+        );
+
+        cine.getListFunciones().add(funcionLaura);
+        cine.getListFunciones().add(funcionAndres);
+        cine.getListFunciones().add(funcionValentina);
+        cine.getListFunciones().add(funcionSantiago);
+        cine.getListFunciones().add(funcionCamila);
+
+        cine.getListFunciones().add(funcionLaura2);
+        cine.getListFunciones().add(funcionAndres2);
+        cine.getListFunciones().add(funcionValentina2);
+        cine.getListFunciones().add(funcionSantiago2);
+        cine.getListFunciones().add(funcionCamila2);
+
+        Consumible clasico = cine.obtenerCombo("Clásico");
+        Consumible familiar = cine.obtenerCombo("Familiar");
+        Consumible junior = cine.obtenerCombo("Junior");
+        Consumible pro = cine.obtenerCombo("Pro");
+
+        Consumible gaseosa = cine.obtenerProducto("Gaseosa");
+        Consumible crispetaGrande = cine.obtenerProducto("Crispeta G");
+        Consumible crispetaMediana = cine.obtenerProducto("Crispeta M");
+        Consumible chocolatina = cine.obtenerProducto("Chocolatina");
+        Consumible perro = cine.obtenerProducto("Perro");
+
+        crearCompra(
+                cine, laura, "C001", funcionLaura,
+                new String[]{"A1", "A2"},
+                hoy, new EstadoPagada(),
+                clasico
+        );
+
+        crearCompra(
+                cine, andres, "C002", funcionAndres,
+                new String[]{"B1"},
+                hoy, new EstadoPagada(),
+                familiar
+        );
+
+        crearCompra(
+                cine, valentina, "C003", funcionValentina,
+                new String[]{"C1", "C2"},
+                hoy, new EstadoPagada(),
+                junior
+        );
+
+        crearCompra(
+                cine, santiago, "C004", funcionSantiago,
+                new String[]{"D1"},
+                hoy, new EstadoPagada(),
+                pro
+        );
+
+        crearCompra(
+                cine, camila, "C005", funcionCamila,
+                new String[]{"E1"},
+                hoy, new EstadoPagada(),
+                perro, gaseosa
+        );
+
+        crearCompra(
+                cine, laura, "C006", funcionLaura2,
+                new String[]{"A3"},
+                ayer, new EstadoReembolsada(),
+                chocolatina
+        );
+
+        crearCompra(
+                cine, andres, "C007", funcionAndres2,
+                new String[]{"B2"},
+                ayer, new EstadoCancelada(),
+                gaseosa
+        );
+
+        crearCompra(
+                cine, valentina, "C008", funcionValentina2,
+                new String[]{"C3"},
+                hoy, null,
+                crispetaGrande
+        );
+
+        crearCompra(
+                cine, santiago, "C009", funcionSantiago2,
+                new String[]{"D2", "D3"},
+                ayer, new EstadoPagada(),
+                junior, chocolatina
+        );
+
+        crearCompra(
+                cine, camila, "C010", funcionCamila2,
+                new String[]{"E2"},
+                ayer, new EstadoReembolsada(),
+                clasico
+        );
+    }
+
+
+    private static void crearCompra(
+            Cine cine,
+            Cliente cliente,
+            String codigo,
+            Funcion funcion,
+            String[] asientos,
+            LocalDate fechaCompra,
+            EstadoCompra estado,
+            Consumible... consumibles
+    ) {
+
+        Compra compra = new Compra(
+                codigo,
+                fechaCompra,
+                0,
+                0
+        );
+
+        compra.asignarCliente(cliente);
+
+        for (int i = 0; i < asientos.length; i++) {
+
+            Ticket ticket = new Ticket(
+                    codigo + "-T" + (i + 1),
+                    asientos[i]
+            );
+
+            ticket.setTheFuncion(funcion);
+            ticket.setPrecio(funcion.calcularCosto());
+
+            compra.addTicket(ticket);
+        }
+
+        for (Consumible consumible : consumibles) {
+            if (consumible != null) {
+                compra.addConsumible(consumible);
+            }
+        }
+
+        compra.setTotal(compra.calcularTotal());
+        compra.setPuntosCompra(compra.calcularPuntosCompra());
+
+        if (estado instanceof EstadoPagada) {
+            compra.pagar();
+        } else if (estado != null) {
+            compra.cambiarEstado(estado);
+        }
+
+        cliente.getListCompras().add(compra);
+        cine.getListCompras().add(compra);
     }
 }

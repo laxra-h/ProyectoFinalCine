@@ -22,12 +22,22 @@ public class ClienteService {
      * @param cliente
      * @param compra
      */
-    public void solicitarReembolso(Cliente cliente, Compra compra) {
-        if (compra.getTheEstadoCompra() instanceof EstadoPagada) {
-            EstrategiaReembolso theEstrategiaReembolso = compra.getTheEstrategiaReembolso();
-            theEstrategiaReembolso.calcularReembolso(compra.getTotal());
-            compra.setTheEstadoCompra(new EstadoCancelada());
+    public boolean solicitarReembolso(Cliente cliente, Compra compra) {
+        if (cliente == null || compra == null) {
+            return false;
         }
+
+        if (compra.getTheCliente() != cliente) {
+            return false;
+        }
+
+        if (!(compra.getTheEstadoCompra() instanceof EstadoPagada)) {
+            return false;
+        }
+
+        compra.definirEstrategiaReembolso();
+
+        return cine.registrarSolicitudReembolso(compra);
 
     }
 
