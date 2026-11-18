@@ -664,4 +664,22 @@ public class DatosIniciales {
             }
         }
     }
+
+    public static void inicializarPuntosClientes() {
+
+        Cine cine = Cine.getInstance();
+
+        for (Cliente cliente : cine.getListClientes()) {
+
+            int puntosAcumulados = 0;
+
+            for (Compra compra : cliente.getListCompras()) {
+
+                if (compra.getTheEstadoCompra() instanceof EstadoPagada) {
+                    puntosAcumulados += compra.getPuntosCompra();
+                }
+            }
+            cliente.setPuntos(puntosAcumulados);
+        }
+    }
 }

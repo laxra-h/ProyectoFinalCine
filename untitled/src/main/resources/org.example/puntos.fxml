@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.PuntosViewController">
+
+    <children>
+
+        <VBox spacing="20.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="28.0">
+
+            <children>
+
+                <VBox spacing="20.0" styleClass="cartelera-card" VBox.vgrow="ALWAYS">
+
+                    <children>
+
+                        <HBox spacing="20.0">
+
+                            <VBox spacing="12.0" styleClass="detalle-compra" HBox.hgrow="ALWAYS">
+
+                                <Label style="-fx-font-size: 28;" styleClass="titulo-grande" text="PUNTOS DISPONIBLES" />
+
+                                <Label fx:id="lblPuntosDisponibles" styleClass="combo-precio" text="0 puntos" />
+
+                                <Label style="-fx-font-size: 15;" styleClass="texto-sec" text="Puntos vigentes para redimir en tus compras." />
+
+                            </VBox>
+
+                            <VBox spacing="12.0" styleClass="detalle-compra" HBox.hgrow="ALWAYS">
+
+                                <Label style="-fx-font-size: 28;" styleClass="titulo-grande" text="SOBRE TUS PUNTOS" />
+
+                                <Label styleClass="pelicula-titulo" text="¡Cada punto cuenta!" />
+
+                                <Label style="-fx-font-size: 15;" styleClass="texto-sec" text="Los puntos obtenidos tienen una vigencia de un año desde la fecha de compra." wrapText="true" />
+
+                            </VBox>
+
+                        </HBox>
+
+                        <Label style="-fx-font-size: 33;" styleClass="titulo-grande" text="Historial de puntos" />
+
+                        <Label styleClass="subtitulo" text="Consulta los puntos que has obtenido y sus respectivas fechas de vencimiento." />
+
+                        <TableView fx:id="tablaPuntos" prefHeight="400.0" VBox.vgrow="ALWAYS">
+
+                            <columns>
+
+                                <TableColumn fx:id="colCompra" prefWidth="200.0" text="Compra" />
+
+                                <TableColumn fx:id="colFecha" prefWidth="240.0" text="Fecha de obtención" />
+
+                                <TableColumn fx:id="colPuntos" prefWidth="200.0" text="Puntos obtenidos" />
+
+                                <TableColumn fx:id="colVencimiento" prefWidth="240.0" text="Fecha de vencimiento" />
+
+                                <TableColumn fx:id="colEstado" prefWidth="170.0" text="Estado" />
+
+                            </columns>
+
+                            <placeholder>
+                                <Label styleClass="texto-sec" text="Todavía no tienes puntos registrados." />
+                            </placeholder>
+
+                        </TableView>
+
+                    </children>
+
+                </VBox>
+
+            </children>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

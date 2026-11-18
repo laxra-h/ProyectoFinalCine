@@ -84,11 +84,11 @@ public class CompraServices {
                 return "Lo sentimos, ha ocurrido un error en su compra";
             }
 
-            cliente.setPuntos(cliente.getPuntos() - puntosUsados);
-            cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
             cambiarDisponibilidadAsiento(compra);
             compra.asignarCliente(cliente);
             compra.pagar();
+            cliente.setPuntos(cliente.getPuntos() - puntosUsados);
+            cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
             cliente.actualizar("Se ha realizado una compra por el valor de: " + compra.calcularTotal());
             return "!Compra exitosa!";
         }
