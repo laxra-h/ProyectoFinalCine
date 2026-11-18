@@ -1,5 +1,6 @@
 package org.example.model.compra;
 
+import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.model.Ticket;
 import org.example.model.compra.estadoCompra.EstadoCompra;
 import org.example.model.compra.estadoCompra.EstadoPendiente;
@@ -24,6 +25,9 @@ public class Compra {
     private double total;
     private int puntosCompra;
     private boolean usaPuntos;
+    private int puntosUsados;
+    private double montoPagado;
+    private boolean pagoRegistrado;
     private Cliente theCliente;
     private EstadoCompra theEstadoCompra;
     private EstrategiaReembolso theEstrategiaReembolso;
@@ -66,9 +70,33 @@ public class Compra {
 
     /**
      * Metodo para cancelar la compra delegando al estado actual (Patron State)
+     * @throws CancelacionNoPermitidaException
      */
-    public void cancelar() {
+    public void cancelar() throws CancelacionNoPermitidaException {
         this.theEstadoCompra.cancelar(this);
+    }
+
+    /**
+     * Metodo para registrar el monto pagado con tarjeta y los puntos usados
+     * @param montoPagado
+     * @param puntosUsados
+     */
+    public void registrarPago(double montoPagado, int puntosUsados) {
+        this.montoPagado = montoPagado;
+        this.puntosUsados = puntosUsados;
+        this.pagoRegistrado = true;
+    }
+
+    /**
+     * Metodo para obtener el monto pagado con tarjeta
+     * @return
+     */
+    public double getMontoPagado() {
+        return pagoRegistrado ? montoPagado : total;
+    }
+
+    public int getPuntosUsados() {
+        return puntosUsados;
     }
 
 
@@ -104,7 +132,10 @@ public class Compra {
      * @return
      */
     public double calcularTotalReembolso(){
-       return theEstrategiaReembolso.calcularReembolso(total);
+        if (theEstrategiaReembolso == null) {
+            definirEstrategiaReembolso();
+        }
+        return theEstrategiaReembolso.calcularReembolso(getMontoPagado());
     }
 
     /**

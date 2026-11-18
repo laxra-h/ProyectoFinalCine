@@ -45,6 +45,26 @@ public class Sala {
     }
 
 
+    /**
+     * Metodo para clonar los asientos de la sala (patron Prototype)
+     * @return
+     */
+    public Asiento[] clonarAsientos() {
+        Asiento[] copia = new Asiento[listAsientos.length];
+        for (int i = 0; i < listAsientos.length; i++) {
+            if (listAsientos[i] == null) {
+                continue;
+            }
+            try {
+                copia[i] = listAsientos[i].clone();
+                copia[i].setDisponible(true);
+            } catch (CloneNotSupportedException e) {
+                copia[i] = new Asiento(listAsientos[i].getFila(), listAsientos[i].getNumero());
+            }
+        }
+        return copia;
+    }
+
     public String getNumeroSala() {
         return numeroSala;
     }

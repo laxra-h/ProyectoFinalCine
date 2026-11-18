@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.model.Cine;
 import org.example.model.consumibleComposite.Combo;
 import org.example.model.consumibleComposite.Producto;
@@ -608,6 +609,13 @@ public class DatosIniciales {
 
         if (estado instanceof EstadoPagada) {
             compra.pagar();
+            for (Ticket ticket : compra.getListaTickets()) {
+                try {
+                    funcion.ocuparAsiento(ticket.getCodigoAsiento());
+                } catch (AsientoNoDisponibleException e) {
+                    System.err.println("Datos iniciales: " + e.getMessage());
+                }
+            }
         } else if (estado != null) {
             compra.cambiarEstado(estado);
         }
@@ -670,16 +678,12 @@ public class DatosIniciales {
         Cine cine = Cine.getInstance();
 
         for (Cliente cliente : cine.getListClientes()) {
-
-            int puntosAcumulados = 0;
-
+            cliente.getHistorialPuntos().clear();
             for (Compra compra : cliente.getListCompras()) {
-
                 if (compra.getTheEstadoCompra() instanceof EstadoPagada) {
-                    puntosAcumulados += compra.getPuntosCompra();
+                    cliente.agregarPuntos(compra.getPuntosCompra(), compra.getFechaCompra(), compra.getCodigo());
                 }
             }
-            cliente.setPuntos(puntosAcumulados);
         }
     }
 }

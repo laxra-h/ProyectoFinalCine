@@ -1,5 +1,6 @@
 package org.example.model.compra.estadoCompra;
 
+import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.model.compra.Compra;
 
 public class EstadoReembolsada implements EstadoCompra {
@@ -18,8 +19,8 @@ public class EstadoReembolsada implements EstadoCompra {
      * @param compra
      */
     @Override
-    public void cancelar(Compra compra) {
-        // La compra ya fue reembolsada, no se permite doble reembolso
+    public void cancelar(Compra compra) throws CancelacionNoPermitidaException {
+        throw new CancelacionNoPermitidaException("La compra " + compra.getCodigo() + " ya fue reembolsada.");
     }
 
     @Override

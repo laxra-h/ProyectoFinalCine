@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
@@ -91,6 +92,26 @@ public abstract class DecoratorFuncion implements Funcion {
     @Override
     public int getPuntosRedmidos() {
         return funcion.getPuntosRedmidos();
+    }
+
+    @Override
+    public Asiento[] getAsientos() {
+        return funcion.getAsientos();
+    }
+
+    @Override
+    public boolean asientoDisponible(String codigoAsiento) {
+        return funcion.asientoDisponible(codigoAsiento);
+    }
+
+    @Override
+    public void ocuparAsiento(String codigoAsiento) throws AsientoNoDisponibleException {
+        funcion.ocuparAsiento(codigoAsiento);
+    }
+
+    @Override
+    public void liberarAsiento(String codigoAsiento) {
+        funcion.liberarAsiento(codigoAsiento);
     }
 
 }

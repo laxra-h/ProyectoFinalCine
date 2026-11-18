@@ -2,6 +2,7 @@ package org.example.model.funcionDecorator;
 
 public class TresD extends DecoratorFuncion {
 
+    private static final double RECARGO = 6000;
 
     /**
      * Metodo constructor para la clase TresD
@@ -17,6 +18,15 @@ public class TresD extends DecoratorFuncion {
      */
     @Override
     public double calcularCosto() {
-        return funcion.calcularCosto() + 6000;
+        return funcion.calcularCosto() + RECARGO;
+    }
+
+    /**
+     * Metodo para obtener los puntos de la funcion 3D
+     * @return
+     */
+    @Override
+    public int getPuntosRedmidos() {
+        return funcion.getPuntosRedmidos() + (int) (RECARGO / FuncionBase.VALOR_PUNTO);
     }
 }
