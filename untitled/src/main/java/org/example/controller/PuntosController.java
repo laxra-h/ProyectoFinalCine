@@ -39,16 +39,6 @@ public class PuntosController {
         if (cliente == null) {
             return 0;
         }
-
-        int puntosDisponibles = 0;
-
-        for (Compra compra : obtenerComprasConPuntos(cliente)) {
-
-            if (puntosVigentes(compra)) {
-                puntosDisponibles += compra.getPuntosCompra();
-            }
-        }
-
-        return puntosDisponibles;
+        return cliente.getPuntos();
     }
 }

@@ -87,6 +87,8 @@ public class CompraServices {
             cambiarDisponibilidadAsiento(compra);
             compra.asignarCliente(cliente);
             compra.pagar();
+            cliente.getListCompras().add(compra);
+            cine.getListCompras().add(compra);
             cliente.setPuntos(cliente.getPuntos() - puntosUsados);
             cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
             cliente.actualizar("Se ha realizado una compra por el valor de: " + compra.calcularTotal());

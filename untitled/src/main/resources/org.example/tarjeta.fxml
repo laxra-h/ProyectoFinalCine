@@ -62,7 +62,7 @@
                                 <VBox spacing="6.0">
                                     <Label styleClass="form-label" text="MÉTODO DE PAGO" />
 
-                                    <ComboBox fx:id="cbMetodoPago" maxWidth="476.0" promptText="Selecciona un método" />
+                                    <ComboBox fx:id="cbMetodoPago" maxWidth="476.0" styleClass="compra-combo" promptText="Selecciona un método" />
                                 </VBox>
 
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">

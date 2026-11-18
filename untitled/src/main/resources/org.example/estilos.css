@@ -538,3 +538,198 @@
     -fx-border-radius: 12px;
     -fx-padding: 16px;
 }
+
+/* COMBOBOX DE COMPRA */
+
+.compra-combo {
+    -fx-background-color: #271C20;
+    -fx-border-color: #5A3B42;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-border-width: 1.2px;
+    -fx-pref-height: 38px;
+}
+
+.compra-combo:hover {
+    -fx-border-color: #D9B26F;
+}
+
+.compra-combo:focused {
+    -fx-border-color: #D9B26F;
+    -fx-border-width: 1.5px;
+}
+
+.compra-combo .list-cell {
+    -fx-text-fill: #F3E9DC;
+    -fx-background-color: transparent;
+    -fx-font-size: 13px;
+}
+
+.compra-combo .arrow {
+    -fx-background-color: #D9B26F;
+}
+
+.compra-combo .arrow-button {
+    -fx-background-color: #3A252C;
+    -fx-background-radius: 0 6px 6px 0;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1C1417;
+    -fx-border-color: #D9B26F;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #1C1417;
+    -fx-text-fill: #F3E9DC;
+    -fx-padding: 9px;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #781C2D;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #781C2D;
+    -fx-text-fill: #D9B26F;
+}
+
+
+/* SPINNER DE COMPRA */
+
+.compra-spinner {
+    -fx-background-color: #271C20;
+    -fx-border-color: #5A3B42;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+}
+
+.compra-spinner .text-field {
+    -fx-background-color: #271C20;
+    -fx-text-fill: #F3E9DC;
+    -fx-background-radius: 7px 0 0 7px;
+}
+
+.compra-spinner .increment-arrow-button,
+.compra-spinner .decrement-arrow-button {
+    -fx-background-color: #3A252C;
+}
+
+.compra-spinner .increment-arrow,
+.compra-spinner .decrement-arrow {
+    -fx-background-color: #D9B26F;
+}
+
+/* LISTA DE CONFITERÍA */
+
+   .confiteria-list {
+       -fx-background-color: #1C1417;
+       -fx-control-inner-background: #1C1417;
+       -fx-background-insets: 0;
+       -fx-padding: 0;
+       -fx-border-color: #3A2A2F;
+       -fx-border-radius: 8px;
+       -fx-background-radius: 8px;
+   }
+
+.confiteria-list .virtual-flow {
+    -fx-background-color: #1C1417;
+}
+
+.confiteria-list .clipped-container {
+    -fx-background-color: #1C1417;
+}
+
+.confiteria-list .list-cell {
+    -fx-background-color: #1C1417;
+    -fx-text-fill: #F3E9DC;
+    -fx-padding: 8px 10px;
+    -fx-border-color: transparent transparent #3A2A2F transparent;
+}
+
+.confiteria-list .list-cell:hover {
+    -fx-background-color: #271C20;
+}
+
+.confiteria-list .list-cell:selected {
+    -fx-background-color: #3A252C;
+}
+
+.confiteria-list .scroll-bar:vertical {
+    -fx-background-color: #1C1417;
+}
+
+.confiteria-list .scroll-bar .thumb {
+    -fx-background-color: #6A5157;
+    -fx-background-radius: 5px;
+}
+
+.confiteria-list .scroll-bar .thumb:hover {
+    -fx-background-color: #B3263E;
+}
+
+.confiteria-list .scroll-bar .increment-arrow,
+.confiteria-list .scroll-bar .decrement-arrow {
+    -fx-background-color: #D9B26F;
+}
+
+.confiteria-list .scroll-bar .track {
+    -fx-background-color: #1C1417;
+}
+
+.asiento-disponible {
+    -fx-background-color: #49316F;
+    -fx-background-radius: 5px;
+}
+
+.asiento-seleccionado {
+    -fx-background-color: #D99B19;
+    -fx-background-radius: 5px;
+}
+
+.asiento-ocupado {
+    -fx-background-color: #454545;
+    -fx-background-radius: 5px;
+}
+
+/* ASIENTOS */
+
+.asiento-boton {
+    -fx-pref-width: 43px;
+    -fx-pref-height: 38px;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-font-size: 12px;
+    -fx-text-fill: #F3E9DC;
+    -fx-cursor: hand;
+}
+
+.asiento-disponible {
+    -fx-background-color: #49316F;
+    -fx-border-color: #63458E;
+}
+
+.asiento-disponible:hover {
+    -fx-background-color: #62458F;
+    -fx-border-color: #D9B26F;
+}
+
+.asiento-seleccionado {
+    -fx-background-color: #D99B19;
+    -fx-border-color: #F0BD4D;
+    -fx-text-fill: #1C1417;
+    -fx-font-weight: bold;
+}
+
+.asiento-ocupado {
+    -fx-background-color: #454545;
+    -fx-border-color: #555555;
+    -fx-text-fill: #A89A94;
+    -fx-cursor: default;
+}
+
+.fila-asiento {
+    -fx-text-fill: #F3E9DC;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
