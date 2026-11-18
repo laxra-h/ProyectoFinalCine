@@ -22,7 +22,7 @@ import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.exceptions.SaldoInsuficienteException;
 import org.example.model.Cine;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.consumibleComposite.Combo;
 import org.example.model.consumibleComposite.Producto;

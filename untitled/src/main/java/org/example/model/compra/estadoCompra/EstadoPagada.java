@@ -1,7 +1,7 @@
 package org.example.model.compra.estadoCompra;
 
 import org.example.exceptions.CancelacionNoPermitidaException;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.compra.estrategiaReembolso.ReembolsoCompleto;
 import org.example.model.compra.estrategiaReembolso.SinReembolso;

@@ -1,7 +1,7 @@
 package org.example.model.compra;
 
 import org.example.exceptions.CancelacionNoPermitidaException;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.estadoCompra.EstadoCompra;
 import org.example.model.compra.estadoCompra.EstadoPendiente;
 import org.example.model.compra.estrategiaReembolso.EstrategiaReembolso;
@@ -9,7 +9,6 @@ import org.example.model.compra.estrategiaReembolso.ReembolsoCompleto;
 import org.example.model.compra.estrategiaReembolso.ReembolsoParcial;
 import org.example.model.compra.estrategiaReembolso.SinReembolso;
 import org.example.model.consumibleComposite.Consumible;
-import org.example.model.salaPrototype.Asiento;
 import org.example.model.usuarios.Cliente;
 
 import java.time.Duration;

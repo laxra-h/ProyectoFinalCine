@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import org.example.model.Cine;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.funcionDecorator.Funcion;
 import org.example.model.salaPrototype.Asiento;

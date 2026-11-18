@@ -1,16 +1,14 @@
 package org.example.model.funcionDecorator;
 
 import org.example.exceptions.AsientoNoDisponibleException;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
 import org.example.model.salaPrototype.Sala;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

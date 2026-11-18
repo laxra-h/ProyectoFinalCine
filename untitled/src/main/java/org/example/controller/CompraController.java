@@ -6,7 +6,7 @@ import org.example.model.funcionDecorator.Funcion;
 import org.example.model.pelicula.Pelicula;
 import org.example.services.CompraServices;
 import org.example.services.SesionActual;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.usuarios.Cliente;
 

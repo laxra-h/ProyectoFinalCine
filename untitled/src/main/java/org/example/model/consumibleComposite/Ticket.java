@@ -1,6 +1,5 @@
-package org.example.model;
+package org.example.model.consumibleComposite;
 
-import org.example.model.consumibleComposite.Consumible;
 import org.example.model.funcionDecorator.Funcion;
 
 public class Ticket implements Consumible {

@@ -2,18 +2,13 @@ package org.example.services;
 
 import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.model.Cine;
-import org.example.model.Ticket;
+import org.example.model.consumibleComposite.Ticket;
 import org.example.model.compra.Compra;
-import org.example.model.compra.estadoCompra.EstadoCancelada;
 import org.example.model.compra.estadoCompra.EstadoPagada;
-import org.example.model.compra.estrategiaReembolso.EstrategiaReembolso;
 import org.example.model.compra.estrategiaReembolso.SinReembolso;
 import org.example.model.funcionDecorator.EstadoFuncion;
-import org.example.model.funcionDecorator.Funcion;
 import org.example.model.salaPrototype.Asiento;
 import org.example.model.usuarios.Cliente;
-
-import java.util.List;
 
 public class ClienteService {
 
