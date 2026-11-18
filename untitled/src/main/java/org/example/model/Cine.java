@@ -10,6 +10,7 @@ import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Sala;
 import org.example.model.usuarios.Administrador;
 import org.example.model.usuarios.Cliente;
+import org.example.model.promocion.Promocion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public final class Cine {
     private List<Funcion> listFunciones;
     private List<Compra> listCompras;
     private List<Compra> listSolicitudesReembolso;
+    private List<Promocion> listPromociones;
 
 
 
@@ -50,6 +52,7 @@ public final class Cine {
         this.listFunciones = new ArrayList<>();
         this.listCompras = new ArrayList<>();
         this.listSolicitudesReembolso = new ArrayList<>();
+        this.listPromociones = new ArrayList<>();
     }
 
     /**
@@ -479,6 +482,40 @@ public final class Cine {
 
     public List<Compra> getListSolicitudesReembolso() {
         return listSolicitudesReembolso;
+    }
+
+    // ===================== CRUD PROMOCION =====================
+
+    public boolean crearPromocion(Promocion promocion) {
+        if (promocion == null || obtenerPromocion(promocion.getNombre()) != null) {
+            return false;
+        }
+
+        listPromociones.add(promocion);
+        return true;
+    }
+
+    public Promocion obtenerPromocion(String nombre) {
+        if (nombre == null) {
+            return null;
+        }
+
+        for (Promocion promocion : listPromociones) {
+            if (promocion.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return promocion;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean eliminarPromocion(String nombre) {
+        Promocion promocion = obtenerPromocion(nombre);
+        return promocion != null && listPromociones.remove(promocion);
+    }
+
+    public List<Promocion> getListPromociones() {
+        return listPromociones;
     }
 
 }

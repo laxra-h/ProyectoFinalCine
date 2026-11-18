@@ -38,7 +38,6 @@ public class ClientesAdminViewController {
     @FXML private Button btnCrear;
     @FXML private Button btnActualizar;
     @FXML private Button btnEliminar;
-    @FXML private Button btnLimpiar;
 
     @FXML private Label lblMensaje;
     @FXML private Label lblPuntos;
@@ -86,7 +85,6 @@ public class ClientesAdminViewController {
 
         btnActualizar.setDisable(true);
         btnEliminar.setDisable(true);
-        refrescarClientes();
         limpiarFormulario();
     }
 
@@ -126,9 +124,6 @@ public class ClientesAdminViewController {
                 new SimpleStringProperty(estadoTarjeta(data.getValue())));
     }
 
-    private void refrescarClientes() {
-        clientes.setAll(controller.obtenerClientes());
-    }
 
     private void filtrarClientes(String texto) {
         String busqueda = texto == null ? "" : texto.trim().toLowerCase(Locale.ROOT);
@@ -235,7 +230,6 @@ public class ClientesAdminViewController {
     private void finalizarOperacion(ClientesAdminController.ResultadoOperacion resultado) {
         mostrarMensaje(resultado.mensaje(), resultado.exitoso());
         if (resultado.exitoso()) {
-            refrescarClientes();
             limpiarFormulario();
         }
     }
