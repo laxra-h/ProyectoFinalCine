@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.model.Cine;
 import org.example.model.Ticket;
 import org.example.model.compra.Compra;
@@ -151,7 +152,11 @@ public class ComprasAdminController {
             return new ResultadoOperacion(false, "No fue posible calcular un valor de reembolso válido.");
         }
 
-        compra.cancelar();
+        try {
+            compra.cancelar();
+        } catch (CancelacionNoPermitidaException e) {
+            return new ResultadoOperacion(false, e.getMessage());
+        }
 
         if (compra.getTheEstadoCompra() instanceof EstadoReembolsada) {
             cine.getListSolicitudesReembolso().remove(compra);
