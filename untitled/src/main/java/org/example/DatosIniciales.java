@@ -23,6 +23,7 @@ import org.example.model.consumibleComposite.Consumible;
 import org.example.model.tarjeta.TarjetaVirtual;
 import org.example.model.compra.estadoCompra.EstadoPagada;
 import org.example.model.compra.estadoCompra.EstadoReembolsada;
+import org.example.model.usuarios.Administrador;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class DatosIniciales {
 
         Cine cine = Cine.getInstance();
 
+        inicializarAdministrador(cine);
         inicializarPeliculas(cine);
         inicializarSalas(cine);
         inicializarFunciones(cine);
@@ -681,5 +683,21 @@ public class DatosIniciales {
             }
             cliente.setPuntos(puntosAcumulados);
         }
+    }
+
+    private static void inicializarAdministrador(Cine cine) {
+        if (!cine.getListAministradores().isEmpty()) {
+            return;
+        }
+
+        Administrador administrador = new Administrador(
+                "123",
+                "Administrador",
+                "324859572",
+                "admin@cinemauq.com",
+                "123"
+        );
+
+        cine.crearAdministrador(administrador);
     }
 }
