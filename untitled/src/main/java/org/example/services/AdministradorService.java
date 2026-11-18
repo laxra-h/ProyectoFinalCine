@@ -30,10 +30,28 @@ public class AdministradorService {
      * @param monto
      * @param id
      */
-    public void recargarTarjeta(double monto, String  id){
-        Cliente c = buscarCLiente(id);
-        c.getTheTarjeta().setSaldo(c.getTheTarjeta().getSaldo() + monto);
-}
+    public void recargarTarjeta(double monto, String id) {
+
+        Cliente cliente = buscarCLiente(id);
+
+        if (cliente == null || cliente.getTheTarjeta() == null) {
+            return;
+        }
+
+        if (!cliente.getTheTarjeta().isRecargaSolicitada()) {
+            return;
+        }
+
+        if (cliente.getTheTarjeta().getMontoSolicitado() != monto) {
+            return;
+        }
+
+        cliente.getTheTarjeta().recargar(monto);
+
+        cliente.actualizar(
+                "Tu recarga por $" + monto + " ha sido aprobada."
+        );
+    }
 
 public Cliente buscarCLiente(String id){
         for (Cliente c: cine.getListClientes()){

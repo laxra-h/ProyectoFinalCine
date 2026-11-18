@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" styleClass="root" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.CarteleraViewController">
+    <children>
+
+        <VBox spacing="16.0" styleClass="cartelera-root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+            <children>
+
+                <HBox fx:id="contenedorPeliculas" spacing="20.0" VBox.vgrow="ALWAYS">
+                    <children>
+
+                        <VBox fx:id="tarjetaPelicula1" maxWidth="Infinity" prefWidth="0.0" spacing="9.0" styleClass="cartelera-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <StackPane fx:id="posterPelicula1" minHeight="150.0" styleClass="cartelera-poster" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="phPelicula1" styleClass="poster-placeholder" text="🎬" />
+                                        <ImageView fx:id="imgPelicula1" fitHeight="387.0" fitWidth="319.0" managed="false" preserveRatio="false" smooth="true">
+                                 <image>
+                                    <Image url="@con_faldas_y_a_lo_loco.jpg" />
+                                 </image></ImageView>
+                                        <Label fx:id="lblClasificacion1" styleClass="badge-clasificacion" StackPane.alignment="TOP_RIGHT">
+                                            <StackPane.margin>
+                                                <Insets right="10.0" top="10.0" />
+                                            </StackPane.margin>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+
+                                <Label fx:id="lblTitulo1" maxWidth="Infinity" styleClass="pelicula-titulo" wrapText="true" />
+                                <Label fx:id="lblMeta1" maxWidth="Infinity" styleClass="pelicula-meta" wrapText="true" />
+                                <Label fx:id="lblDirector1" maxWidth="Infinity" styleClass="texto-sec" wrapText="true" />
+                                <Label fx:id="lblDescripcion1" alignment="TOP_LEFT" maxHeight="70.0" maxWidth="Infinity" minHeight="70.0" prefHeight="70.0" styleClass="pelicula-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="FUNCIONES DISPONIBLES" />
+
+                                <VBox fx:id="funcionesPelicula1" minHeight="124.0" spacing="6.0">
+                                    <children>
+
+                                        <HBox fx:id="filaFuncion1_1" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia1_1" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora1_1" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala1_1" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato1_1" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio1_1" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion1_2" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia1_2" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora1_2" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala1_2" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato1_2" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio1_2" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion1_3" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia1_3" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora1_3" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala1_3" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato1_3" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio1_3" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="tarjetaPelicula2" maxWidth="Infinity" prefWidth="0.0" spacing="9.0" styleClass="cartelera-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <StackPane fx:id="posterPelicula2" minHeight="150.0" styleClass="cartelera-poster" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="phPelicula2" styleClass="poster-placeholder" text="🎬" />
+                                        <ImageView fx:id="imgPelicula2" fitHeight="387.0" fitWidth="319.0" managed="false" preserveRatio="false" smooth="true">
+                                 <image>
+                                    <Image url="@casablanca.jpg" />
+                                 </image></ImageView>
+                                        <Label fx:id="lblClasificacion2" styleClass="badge-clasificacion" StackPane.alignment="TOP_RIGHT">
+                                            <StackPane.margin>
+                                                <Insets right="10.0" top="10.0" />
+                                            </StackPane.margin>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+
+                                <Label fx:id="lblTitulo2" maxWidth="Infinity" styleClass="pelicula-titulo" wrapText="true" />
+                                <Label fx:id="lblMeta2" maxWidth="Infinity" styleClass="pelicula-meta" wrapText="true" />
+                                <Label fx:id="lblDirector2" maxWidth="Infinity" styleClass="texto-sec" wrapText="true" />
+                                <Label fx:id="lblDescripcion2" alignment="TOP_LEFT" maxHeight="70.0" maxWidth="Infinity" minHeight="70.0" prefHeight="70.0" styleClass="pelicula-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="FUNCIONES DISPONIBLES" />
+
+                                <VBox fx:id="funcionesPelicula2" minHeight="124.0" spacing="6.0">
+                                    <children>
+
+                                        <HBox fx:id="filaFuncion2_1" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia2_1" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora2_1" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala2_1" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato2_1" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio2_1" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion2_2" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia2_2" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora2_2" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala2_2" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato2_2" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio2_2" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion2_3" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia2_3" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora2_3" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala2_3" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato2_3" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio2_3" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="tarjetaPelicula3" maxWidth="Infinity" prefWidth="0.0" spacing="9.0" styleClass="cartelera-card" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <StackPane fx:id="posterPelicula3" minHeight="150.0" styleClass="cartelera-poster" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="phPelicula3" styleClass="poster-placeholder" text="🎬" />
+                                        <ImageView fx:id="imgPelicula3" fitHeight="387.0" fitWidth="319.0" managed="false" preserveRatio="false" smooth="true">
+                                 <image>
+                                    <Image url="@dracula.jpg" />
+                                 </image></ImageView>
+                                        <Label fx:id="lblClasificacion3" styleClass="badge-clasificacion" StackPane.alignment="TOP_RIGHT">
+                                            <StackPane.margin>
+                                                <Insets right="10.0" top="10.0" />
+                                            </StackPane.margin>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+
+                                <Label fx:id="lblTitulo3" maxWidth="Infinity" styleClass="pelicula-titulo" wrapText="true" />
+                                <Label fx:id="lblMeta3" maxWidth="Infinity" styleClass="pelicula-meta" wrapText="true" />
+                                <Label fx:id="lblDirector3" maxWidth="Infinity" styleClass="texto-sec" wrapText="true" />
+                                <Label fx:id="lblDescripcion3" alignment="TOP_LEFT" maxHeight="70.0" maxWidth="Infinity" minHeight="70.0" prefHeight="70.0" styleClass="pelicula-descripcion" wrapText="true" />
+
+                                <Region styleClass="separador-cartelera" />
+
+                                <Label styleClass="form-label" text="FUNCIONES DISPONIBLES" />
+
+                                <VBox fx:id="funcionesPelicula3" minHeight="124.0" spacing="6.0">
+                                    <children>
+
+                                        <HBox fx:id="filaFuncion3_1" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia3_1" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora3_1" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala3_1" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato3_1" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio3_1" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion3_2" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia3_2" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora3_2" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala3_2" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato3_2" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio3_2" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox fx:id="filaFuncion3_3" alignment="CENTER_LEFT" spacing="10.0" styleClass="funcion-item">
+                                            <children>
+                                                <Label fx:id="lblDia3_3" styleClass="funcion-dia" />
+                                                <Label fx:id="lblHora3_3" styleClass="funcion-hora" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="lblSala3_3" styleClass="texto-sec" />
+                                                <Label fx:id="lblFormato3_3" styleClass="funcion-formato" />
+                                                <Label fx:id="lblPrecio3_3" styleClass="funcion-precio" />
+                                            </children>
+                                        </HBox>
+
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>

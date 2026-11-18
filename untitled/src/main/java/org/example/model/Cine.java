@@ -28,6 +28,7 @@ public final class Cine {
     private List<Pelicula> listPeliculas;
     private List<Funcion> listFunciones;
     private List<Compra> listCompras;
+    private List<Compra> listSolicitudesReembolso;
 
 
 
@@ -46,6 +47,7 @@ public final class Cine {
         this.listPeliculas = new ArrayList<>();
         this.listFunciones = new ArrayList<>();
         this.listCompras = new ArrayList<>();
+        this.listSolicitudesReembolso = new ArrayList<>();
     }
 
     /**
@@ -396,6 +398,19 @@ public final class Cine {
 
     public List<Compra> getListCompras() {
         return listCompras;
+    }
+
+    public boolean registrarSolicitudReembolso(Compra compra) {
+        if (compra == null || listSolicitudesReembolso.contains(compra)) {
+            return false;
+        }
+
+        listSolicitudesReembolso.add(compra);
+        return true;
+    }
+
+    public List<Compra> getListSolicitudesReembolso() {
+        return listSolicitudesReembolso;
     }
 
 }
