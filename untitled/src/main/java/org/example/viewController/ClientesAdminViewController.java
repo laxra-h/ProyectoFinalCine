@@ -75,6 +75,7 @@ public class ClientesAdminViewController {
 
         clientesFiltrados = new FilteredList<>(clientes, cliente -> true);
         tablaClientes.setItems(clientesFiltrados);
+        cargarClientes();
 
         tablaClientes.getSelectionModel().selectedItemProperty().addListener(
                 (observable, anterior, seleccionado) -> cargarClienteSeleccionado(seleccionado)
@@ -122,6 +123,10 @@ public class ClientesAdminViewController {
                 )));
         colEstadoTarjeta.setCellValueFactory(data ->
                 new SimpleStringProperty(estadoTarjeta(data.getValue())));
+    }
+
+    private void cargarClientes() {
+        clientes.setAll(controller.obtenerClientes());
     }
 
 
@@ -230,6 +235,7 @@ public class ClientesAdminViewController {
     private void finalizarOperacion(ClientesAdminController.ResultadoOperacion resultado) {
         mostrarMensaje(resultado.mensaje(), resultado.exitoso());
         if (resultado.exitoso()) {
+            cargarClientes();
             limpiarFormulario();
         }
     }
