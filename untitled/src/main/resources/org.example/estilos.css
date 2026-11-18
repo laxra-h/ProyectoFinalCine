@@ -733,3 +733,17 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
+
+.text-area.login-input {
+    -fx-control-inner-background: #1C1417;
+    -fx-background-color: #1C1417;
+    -fx-text-fill: #F3E9DC;
+    -fx-prompt-text-fill: #A89A94;
+    -fx-border-color: #3A2A2F;
+    -fx-border-radius: 9px;
+    -fx-background-radius: 9px;
+}
+
+.text-area.login-input .content {
+    -fx-background-color: #1C1417;
+}
