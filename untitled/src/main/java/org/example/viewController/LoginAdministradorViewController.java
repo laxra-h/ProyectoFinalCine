@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.model.Cine;
+import org.example.model.usuarios.Administrador;
+import org.example.services.SesionActual;
 
 import java.io.IOException;
 
@@ -33,27 +36,41 @@ public class LoginAdministradorViewController {
 
     @FXML
     private void ingresar() {
-
         String usuario = txtUsuario.getText().trim();
         String contrasena = txtContrasena.getText();
 
         lblMensaje.setText("");
 
-        if (usuario.isEmpty() && contrasena.isEmpty()) {
+        if (usuario.isEmpty() || contrasena.isEmpty()) {
             lblMensaje.setText("Ingresa tu usuario y contraseña.");
             return;
         }
 
-        if (usuario.isEmpty()) {
-            lblMensaje.setText("Ingresa tu usuario.");
-            txtUsuario.requestFocus();
+        Cine cine = Cine.getInstance();
+        Administrador administrador = cine.obtenerAdministrador(usuario);
+
+        if (administrador == null ||
+                !administrador.getContrasenia().equals(contrasena)) {
+            lblMensaje.setText("Usuario o contraseña incorrectos.");
             return;
         }
 
-        if (contrasena.isEmpty()) {
-            lblMensaje.setText("Ingresa tu contraseña.");
-            txtContrasena.requestFocus();
-            return;
+        SesionActual.getInstance().iniciarSesion(administrador);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org.example/panelAdministrador.fxml")
+            );
+
+            Parent root = loader.load();
+            Stage stage = (Stage) txtUsuario.getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            lblMensaje.setText("No fue posible abrir el panel administrativo.");
         }
     }
 

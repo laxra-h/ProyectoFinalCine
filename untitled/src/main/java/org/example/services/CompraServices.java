@@ -37,11 +37,12 @@ public class CompraServices {
      * @return
      */
     public int cambiarPuntos(Compra compra) {
-        int puntosCliente = compra.getTheCliente().getPuntos();
-        if (puntosCliente >= maximoPuntosDescontar(compra)) {
-            return compra.getTheCliente().getPuntos() * valorCambio;
+        if (!compra.isUsaPuntos()) {
+            return 0;
         }
-        return 0;
+        int puntosCliente = compra.getTheCliente().getPuntos();
+        int puntosAUsar = Math.min(puntosCliente, maximoPuntosDescontar(compra));
+        return puntosAUsar * valorCambio;
     }
 
     /**
@@ -62,14 +63,8 @@ public class CompraServices {
      */
     public boolean verificarSaldo(Compra compra) {
         boolean bandera = false;
-        if (compra.isUsaPuntos()) {
-            if (descontarPuntosCompra(compra) <= compra.getTheCliente().getTheTarjeta().getSaldo()) {
-                bandera = true;
-            } else {
-                if (compra.calcularTotal() <= compra.getTheCliente().getTheTarjeta().getSaldo()) {
-                    bandera = true;
-                }
-            }
+        if (descontarPuntosCompra(compra) <= compra.getTheCliente().getTheTarjeta().getSaldo()) {
+            bandera = true;
         }
         return bandera;
     }
@@ -79,15 +74,23 @@ public class CompraServices {
      * @param compra
      * @return
      */
-    public String  efectuarCompra(Compra compra) {
+    public String efectuarCompra(Compra compra) {
         Cliente cliente = compra.getTheCliente();
+        int puntosUsados = cambiarPuntos(compra) / valorCambio;
+        double valorPagar = descontarPuntosCompra(compra);
+
         if (verificarSaldo(compra)) {
-            cliente.setPuntos(cliente.getPuntos() - cambiarPuntos(compra));
-            cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() - descontarPuntosCompra(compra));
-            cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
+            if (!cliente.getTheTarjeta().pagar(valorPagar, "Compra " + compra.getCodigo())) {
+                return "Lo sentimos, ha ocurrido un error en su compra";
+            }
+
             cambiarDisponibilidadAsiento(compra);
             compra.asignarCliente(cliente);
             compra.pagar();
+            cliente.getListCompras().add(compra);
+            cine.getListCompras().add(compra);
+            cliente.setPuntos(cliente.getPuntos() - puntosUsados);
+            cliente.setPuntos(cliente.getPuntos() + compra.calcularPuntosCompra());
             cliente.actualizar("Se ha realizado una compra por el valor de: " + compra.calcularTotal());
             return "!Compra exitosa!";
         }
@@ -127,8 +130,7 @@ public class CompraServices {
         }
         compra.definirEstrategiaReembolso();
         double devolucion = compra.getTheEstrategiaReembolso().calcularReembolso(compra.getTotal());
-        cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() + devolucion);
-
+        cliente.getTheTarjeta().reembolsar(devolucion, "Reembolso por cancelación de función - Compra " + compra.getCodigo());
 
     }
 

@@ -88,5 +88,9 @@ public abstract class DecoratorFuncion implements Funcion {
         return funcion.getListObservadores();
     }
 
+    @Override
+    public int getPuntosRedmidos() {
+        return funcion.getPuntosRedmidos();
+    }
 
 }

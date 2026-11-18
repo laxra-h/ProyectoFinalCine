@@ -30,10 +30,28 @@ public class AdministradorService {
      * @param monto
      * @param id
      */
-    public void recargarTarjeta(double monto, String  id){
-        Cliente c = buscarCLiente(id);
-        c.getTheTarjeta().setSaldo(c.getTheTarjeta().getSaldo() + monto);
-}
+    public void recargarTarjeta(double monto, String id) {
+
+        Cliente cliente = buscarCLiente(id);
+
+        if (cliente == null || cliente.getTheTarjeta() == null) {
+            return;
+        }
+
+        if (!cliente.getTheTarjeta().isRecargaSolicitada()) {
+            return;
+        }
+
+        if (cliente.getTheTarjeta().getMontoSolicitado() != monto) {
+            return;
+        }
+
+        cliente.getTheTarjeta().recargar(monto);
+
+        cliente.actualizar(
+                "Tu recarga por $" + monto + " ha sido aprobada."
+        );
+    }
 
 public Cliente buscarCLiente(String id){
         for (Cliente c: cine.getListClientes()){
@@ -70,7 +88,7 @@ public Cliente buscarCLiente(String id){
      * @param fechaFin
      * @return
      */
-    public String generarReporteCompras(LocalDate fechaInicio, LocalDate fechaFin) {
+    public String generarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
 
         List<Compra> compras = consultarComprasFecha(fechaInicio, fechaFin);
 
@@ -101,13 +119,6 @@ public Cliente buscarCLiente(String id){
         return "Cantidad de compras: " + compras.size() + "\nTotal de compras: " + ingresosTotales +
                 "\nPromedio de compras: " + promedioCompra + "\nCompra mayor: " + compraMayor.getTotal() + "\nCompra menor: " + compraMenor.getTotal();
 
-
-    }
-
-
-
-    public String generarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
-        List<Compra> listCompras = consultarComprasFecha(fechaInicio, fechaFin);
 
     }
 

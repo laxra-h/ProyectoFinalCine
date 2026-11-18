@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.ComprasAdminViewController">
+    <children>
+        <VBox spacing="15.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="24.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                    <VBox spacing="3.0" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <VBox alignment="CENTER_RIGHT" spacing="5.0">
+                        <Label fx:id="lblTotalCompras" styleClass="funcion-formato" text="0 compras" />
+                        <Label fx:id="lblSolicitudesPendientes" styleClass="texto-sec" text="0 solicitudes pendientes" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+                    <VBox minWidth="620.0" prefWidth="690.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <VBox spacing="10.0" styleClass="cartelera-card" VBox.vgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT" spacing="9.0">
+                                <TextField fx:id="txtBuscar" promptText="Buscar por código, cliente o identificación" styleClass="login-input" HBox.hgrow="ALWAYS" />
+                                <ComboBox fx:id="cbEstado" prefWidth="145.0" styleClass="compra-combo" />
+                                <Button mnemonicParsing="false" onAction="#limpiarFiltros" styleClass="btn-ghost" text="LIMPIAR" />
+                            </HBox>
+                            <CheckBox fx:id="chkSoloSolicitudes" style="-fx-text-fill: #D9B26F;" text="Mostrar únicamente solicitudes de cancelación pendientes" />
+                            <TableView fx:id="tablaCompras" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="colCodigo" prefWidth="76.0" text="Código" />
+                                    <TableColumn fx:id="colCliente" prefWidth="125.0" text="Cliente" />
+                                    <TableColumn fx:id="colFecha" prefWidth="82.0" text="Fecha" />
+                                    <TableColumn fx:id="colEntradas" prefWidth="55.0" text="Entradas" />
+                                    <TableColumn fx:id="colTotal" prefWidth="102.0" text="Total" />
+                                    <TableColumn fx:id="colEstado" prefWidth="88.0" text="Estado" />
+                                    <TableColumn fx:id="colSolicitud" prefWidth="104.0" text="Solicitud" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+
+                    <VBox minWidth="340.0" prefWidth="365.0" spacing="12.0">
+                        <VBox spacing="11.0" styleClass="cartelera-card" VBox.vgrow="ALWAYS">
+                            <Label fx:id="lblTituloDetalle" style="-fx-font-size: 20;" styleClass="titulo-grande" text="SELECCIONA UNA COMPRA" />
+                            <VBox spacing="4.0">
+                                <Label styleClass="form-label" text="CLIENTE" />
+                                <Label fx:id="lblClienteDetalle" styleClass="texto-sec" text="—" />
+                                <Label fx:id="lblIdentificacionDetalle" styleClass="texto-sec" text="—" />
+                            </VBox>
+                            <HBox spacing="16.0">
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="CÓDIGO" />
+                                    <Label fx:id="lblCodigoDetalle" styleClass="texto-sec" text="—" />
+                                </VBox>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="FECHA" />
+                                    <Label fx:id="lblFechaDetalle" styleClass="texto-sec" text="—" />
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="16.0">
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="ENTRADAS" />
+                                    <Label fx:id="lblEntradasDetalle" styleClass="texto-sec" text="—" />
+                                </VBox>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="PUNTOS OBTENIDOS" />
+                                    <Label fx:id="lblPuntosDetalle" styleClass="texto-sec" text="—" />
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="16.0">
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="ESTADO" />
+                                    <Label fx:id="lblEstadoDetalle" styleClass="texto-sec" text="—" />
+                                </VBox>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="SOLICITUD" />
+                                    <Label fx:id="lblSolicitudDetalle" styleClass="texto-sec" text="—" wrapText="true" />
+                                </VBox>
+                            </HBox>
+                            <Region styleClass="separador-cartelera" />
+                            <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+                                <Label styleClass="form-label" text="DETALLE DE ENTRADAS" />
+                                <Label fx:id="lblDetalleEntradas" styleClass="texto-sec" text="—" wrapText="true" />
+                                <Label styleClass="form-label" text="DETALLE DE CONFITERÍA" />
+                                <Label fx:id="lblDetalleConfiteria" styleClass="texto-sec" text="—" wrapText="true" />
+                            </VBox>
+                            <Region styleClass="separador-cartelera" />
+                            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="TOTAL DE LA COMPRA" />
+                                    <Label fx:id="lblTotalDetalle" styleClass="pelicula-titulo" text="—" />
+                                </VBox>
+                                <VBox alignment="CENTER_RIGHT" spacing="3.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="REEMBOLSO ESTIMADO" />
+                                    <Label fx:id="lblReembolsoEstimado" styleClass="combo-precio" text="—" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <VBox spacing="9.0" styleClass="cartelera-card">
+                            <Label style="-fx-font-size: 20;" styleClass="titulo-grande" text="Gestionar solicitud" />
+                            <Button fx:id="btnAprobarSolicitud" maxWidth="Infinity" mnemonicParsing="false" onAction="#aprobarSolicitud" styleClass="btn-primary" text="APROBAR Y REEMBOLSAR" />
+                            <Button fx:id="btnRechazarSolicitud" maxWidth="Infinity" mnemonicParsing="false" onAction="#rechazarSolicitud" styleClass="btn-ghost" text="RECHAZAR SOLICITUD" />
+                        </VBox>
+                    </VBox>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
