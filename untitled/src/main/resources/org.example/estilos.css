@@ -747,3 +747,44 @@
 .text-area.login-input .content {
     -fx-background-color: #1C1417;
 }
+
+.tab-pane {
+    -fx-background-color: #110C0E;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: #110C0E;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #110C0E;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #1C1417;
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: #3A2A2F;
+    -fx-padding: 7 15;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #A89A94;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #D9B26F;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #110C0E;
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: #271C20;
+}
+
+.tab-pane .tab:selected:hover {
+    -fx-background-color: #D9B26F;
+}
