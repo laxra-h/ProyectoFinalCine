@@ -7,6 +7,8 @@ import org.example.model.compra.estrategiaReembolso.SinReembolso;
 import org.example.model.funcionDecorator.EstadoFuncion;
 import org.example.model.salaPrototype.Asiento;
 import org.example.model.usuarios.Cliente;
+import org.example.model.tarjeta.MovimientoTarjeta;
+import org.example.model.tarjeta.TipoMovimiento;
 
 public class EstadoPagada implements EstadoCompra {
 
@@ -41,13 +43,25 @@ public class EstadoPagada implements EstadoCompra {
             }
         }
 
-        double montoReembolso = (compra.getTheEstrategiaReembolso() != null)
-                ? compra.calcularTotalReembolso()
-                : compra.getTotal();
-
         Cliente cliente = compra.getTheCliente();
+        double montoPagado = obtenerMontoPagado(compra, cliente);
+        double montoReembolso = (compra.getTheEstrategiaReembolso() != null)
+                ? compra.getTheEstrategiaReembolso().calcularReembolso(montoPagado)
+                : montoPagado;
+
         if (cliente != null && cliente.getTheTarjeta() != null) {
             cliente.getTheTarjeta().reembolsar(montoReembolso, "Reembolso de la compra " + compra.getCodigo());
+        }
+
+        if (cliente != null && montoPagado > 0) {
+            double proporcionReembolsada = Math.min(1, montoReembolso / montoPagado);
+            int puntosUsados = Math.max(0, (int) Math.round((compra.getTotal() - montoPagado) / 200.0));
+            int puntosGanadosARetirar = (int) Math.floor(compra.getPuntosCompra() * proporcionReembolsada);
+            int puntosUsadosARestaurar = (int) Math.round(puntosUsados * proporcionReembolsada);
+
+            cliente.setPuntos(
+                    Math.max(0, cliente.getPuntos() - puntosGanadosARetirar) + puntosUsadosARestaurar
+            );
         }
 
         if (compra.getListaTickets() != null) {
@@ -68,6 +82,27 @@ public class EstadoPagada implements EstadoCompra {
         if (cliente != null) {
             cliente.actualizar("Compra " + compra.getCodigo() + " cancelada y reembolsada por $" + montoReembolso);
         }
+    }
+    /**
+     * Metodo que obtiene el monto realmente pagado por una compra
+     * @param compra
+     * @param cliente
+     * @return Monto realmente debitado de la tarjeta o el total de la compra si no se encuentra el movimiento
+     */
+    private double obtenerMontoPagado(Compra compra, Cliente cliente) {
+        if (cliente == null || cliente.getTheTarjeta() == null ||
+                cliente.getTheTarjeta().getHistorialMovimientos() == null) {
+            return compra.getTotal();
+        }
+
+        String descripcion = "Compra " + compra.getCodigo();
+        for (MovimientoTarjeta movimiento : cliente.getTheTarjeta().getHistorialMovimientos()) {
+            if (movimiento.getTipo() == TipoMovimiento.COMPRA &&
+                    descripcion.equals(movimiento.getDescripcion())) {
+                return movimiento.getMonto();
+            }
+        }
+        return compra.getTotal();
     }
 
     @Override
