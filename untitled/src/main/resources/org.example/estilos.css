@@ -246,3 +246,13 @@
     -fx-background-radius: 16px;
     -fx-border-radius: 16px;
 }
+
+.role-icono-menuA {
+    -fx-background-color: #781C2D;
+    -fx-background-radius: 12px;
+    -fx-min-width: 38px;
+    -fx-min-height: 38px;
+    -fx-max-width: 38px;
+    -fx-max-height: 38px;
+    -fx-alignment: CENTER;
+}
