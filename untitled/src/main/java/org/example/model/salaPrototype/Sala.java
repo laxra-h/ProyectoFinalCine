@@ -34,7 +34,7 @@ public class Sala {
                 Asiento nuevoAsiento = asientoBase.clone();
 
                 nuevoAsiento.setFila((char) ('A' + i));
-                nuevoAsiento.setNumero((char)j);
+                nuevoAsiento.setNumero(j);
                 nuevoAsiento.setDisponible(true);
 
                 listAsientos[posicion] = nuevoAsiento;

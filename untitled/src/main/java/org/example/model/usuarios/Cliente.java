@@ -2,6 +2,7 @@ package org.example.model.usuarios;
 
 import org.example.model.compra.Compra;
 import org.example.model.observer.Observador;
+import org.example.model.tarjeta.TarjetaVirtual;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

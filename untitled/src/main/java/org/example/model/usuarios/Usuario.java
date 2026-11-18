@@ -25,6 +25,15 @@ public abstract class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    /**
+     * Metodo para autenticar la contrasenia del usuario
+     * @param contrasenia
+     * @return
+     */
+    public boolean autenticar(String contrasenia) {
+        return this.contrasenia != null && this.contrasenia.equals(contrasenia);
+    }
+
 
     public String getId() {
         return id;

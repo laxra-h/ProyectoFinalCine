@@ -78,6 +78,11 @@ public class Compra {
      */
 
     public void definirEstrategiaReembolso(){
+        if (listaTickets == null || listaTickets.isEmpty()
+                || listaTickets.get(0).getTheFuncion() == null) {
+            theEstrategiaReembolso = new SinReembolso();
+            return;
+        }
 
         LocalDateTime fechaCancelacion = LocalDateTime.now();
 
@@ -107,15 +112,16 @@ public class Compra {
      * @return
      */
     public double calcularTotal(){
-        double total = 0;
+        double suma = 0;
         for(Ticket ticket : listaTickets){
-            total += ticket.getPrecio();
+            suma += ticket.getPrecio();
         }
         for (Consumible consumible : listConsumibles) {
-            total += consumible.calcularCosto();
+            suma += consumible.calcularCosto();
         }
-        return total;
-        }
+        this.total = suma;
+        return this.total;
+    }
 
     /**
      * Metodo para asignar el cliente a la compra y suscribirlo a las funciones de sus tickets

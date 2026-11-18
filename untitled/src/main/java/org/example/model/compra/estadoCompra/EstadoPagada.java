@@ -49,7 +49,7 @@ public class EstadoPagada implements EstadoCompra {
 
         Cliente cliente = compra.getTheCliente();
         if (cliente != null && cliente.getTheTarjeta() != null) {
-            cliente.getTheTarjeta().setSaldo(cliente.getTheTarjeta().getSaldo() + montoReembolso);
+            cliente.getTheTarjeta().reembolsar(montoReembolso, "Reembolso compra " + compra.getCodigo());
         }
 
         if (compra.getListaTickets() != null) {
