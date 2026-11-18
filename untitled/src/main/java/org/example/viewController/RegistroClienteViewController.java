@@ -1,5 +1,6 @@
 package org.example.viewController;
 
+import org.example.controller.ClientesAdminController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegistroClienteViewController {
+
+    private final ClientesAdminController clientesController = new ClientesAdminController();
 
     @FXML
     private TextField txtId;
@@ -74,7 +77,20 @@ public class RegistroClienteViewController {
             return;
         }
 
-        mostrarExito("✓ Datos validados correctamente.");
+        ClientesAdminController.ResultadoOperacion resultado = clientesController.crearCliente(
+                txtId.getText(),
+                txtNombre.getText(),
+                txtTelefono.getText(),
+                txtCorreo.getText(),
+                txtContrasena.getText(),
+                dpFechaNacimiento.getValue()
+        );
+
+        if (resultado.exitoso()) {
+            mostrarExito("✓ " + resultado.mensaje() + " Ya puedes iniciar sesión.");
+        } else {
+            mostrarError(resultado.mensaje());
+        }
     }
 
     @FXML
