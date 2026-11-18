@@ -4,10 +4,13 @@ import org.example.model.compra.Compra;
 import org.example.model.consumibleComposite.Combo;
 import org.example.model.consumibleComposite.Producto;
 import org.example.model.funcionDecorator.Funcion;
+import org.example.model.pelicula.ClasificacionPelicula;
+import org.example.model.pelicula.GeneroPelicula;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Sala;
 import org.example.model.usuarios.Administrador;
 import org.example.model.usuarios.Cliente;
+import org.example.model.promocion.Promocion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public final class Cine {
     private List<Funcion> listFunciones;
     private List<Compra> listCompras;
     private List<Compra> listSolicitudesReembolso;
+    private List<Promocion> listPromociones;
 
 
 
@@ -48,6 +52,7 @@ public final class Cine {
         this.listFunciones = new ArrayList<>();
         this.listCompras = new ArrayList<>();
         this.listSolicitudesReembolso = new ArrayList<>();
+        this.listPromociones = new ArrayList<>();
     }
 
     /**
@@ -344,6 +349,72 @@ public final class Cine {
 
 
 
+
+// ===================== CRUD PELICULA =====================
+
+    public boolean crearPelicula(Pelicula pelicula) {
+        if (pelicula == null || pelicula.getNombre() == null ||
+                pelicula.getNombre().isBlank() || obtenerPelicula(pelicula.getNombre()) != null) {
+            return false;
+        }
+        listPeliculas.add(pelicula);
+        return true;
+    }
+
+    public Pelicula obtenerPelicula(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            return null;
+        }
+        for (Pelicula pelicula : listPeliculas) {
+            if (pelicula.getNombre() != null &&
+                    pelicula.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return pelicula;
+            }
+        }
+        return null;
+    }
+
+    public boolean actualizarPelicula(
+            String nombreActual,
+            String nombreNuevo,
+            String director,
+            String descripcion,
+            ClasificacionPelicula clasificacion,
+            GeneroPelicula genero,
+            int duracionMin
+    ) {
+        Pelicula pelicula = obtenerPelicula(nombreActual);
+        Pelicula peliculaConNombreNuevo = obtenerPelicula(nombreNuevo);
+
+        if (pelicula == null || nombreNuevo == null || nombreNuevo.isBlank() ||
+                (peliculaConNombreNuevo != null && peliculaConNombreNuevo != pelicula)) {
+            return false;
+        }
+
+        pelicula.setNombre(nombreNuevo.trim());
+        pelicula.setDirector(director);
+        pelicula.setDescripcion(descripcion);
+        pelicula.setClasificacion(clasificacion);
+        pelicula.setGenero(genero);
+        pelicula.setDuracionMin(duracionMin);
+        return true;
+    }
+
+    public boolean eliminarPelicula(String nombre) {
+        Pelicula pelicula = obtenerPelicula(nombre);
+        if (pelicula == null) {
+            return false;
+        }
+
+        for (Funcion funcion : listFunciones) {
+            if (funcion.getPelicula() == pelicula) {
+                return false;
+            }
+        }
+
+        return listPeliculas.remove(pelicula);
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -411,6 +482,40 @@ public final class Cine {
 
     public List<Compra> getListSolicitudesReembolso() {
         return listSolicitudesReembolso;
+    }
+
+    // ===================== CRUD PROMOCION =====================
+
+    public boolean crearPromocion(Promocion promocion) {
+        if (promocion == null || obtenerPromocion(promocion.getNombre()) != null) {
+            return false;
+        }
+
+        listPromociones.add(promocion);
+        return true;
+    }
+
+    public Promocion obtenerPromocion(String nombre) {
+        if (nombre == null) {
+            return null;
+        }
+
+        for (Promocion promocion : listPromociones) {
+            if (promocion.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return promocion;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean eliminarPromocion(String nombre) {
+        Promocion promocion = obtenerPromocion(nombre);
+        return promocion != null && listPromociones.remove(promocion);
+    }
+
+    public List<Promocion> getListPromociones() {
+        return listPromociones;
     }
 
 }

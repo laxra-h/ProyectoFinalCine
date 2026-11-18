@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1150.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.viewController.FuncionesViewController">
+
+    <children>
+
+        <VBox spacing="16.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="28.0">
+
+            <children>
+
+                <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+
+                    <VBox maxWidth="480.0" minWidth="480.0" prefWidth="480.0" spacing="16.0">
+
+                        <VBox maxHeight="550.0" minHeight="550.0" prefHeight="550.0" spacing="20.0" styleClass="cartelera-card">
+
+                            <Label style="-fx-font-size: 23;" styleClass="titulo-grande" text="Datos de la función" />
+
+                            <HBox spacing="12.0">
+                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="CÓDIGO" />
+                                    <TextField fx:id="txtCodigo" disable="true" maxWidth="Infinity" promptText="Se genera automáticamente" styleClass="login-input" />
+                                </VBox>
+                                <VBox minWidth="130.0" prefWidth="130.0" spacing="6.0">
+                                    <Label styleClass="form-label" text="FORMATO" />
+                                    <ComboBox fx:id="cbFormato" maxWidth="Infinity" promptText="Formato" styleClass="compra-combo" />
+                                </VBox>
+                            </HBox>
+
+                            <VBox spacing="6.0">
+                                <Label styleClass="form-label" text="PELÍCULA" />
+                                <ComboBox fx:id="cbPelicula" maxWidth="Infinity" promptText="Seleccionar película" styleClass="compra-combo" />
+                            </VBox>
+
+                            <VBox spacing="6.0">
+                                <Label styleClass="form-label" text="SALA" />
+                                <ComboBox fx:id="cbSala" maxWidth="Infinity" promptText="Seleccionar sala" styleClass="compra-combo" />
+                            </VBox>
+
+                            <HBox spacing="12.0">
+                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="FECHA" />
+                                    <DatePicker fx:id="dpFecha" maxWidth="Infinity" promptText="Selecciona la fecha" />
+                                </VBox>
+                                <VBox minWidth="130.0" prefWidth="130.0" spacing="6.0">
+                                    <Label styleClass="form-label" text="HORA (HH:mm)" />
+                                    <TextField fx:id="txtHora" maxWidth="Infinity" promptText="14:30" styleClass="login-input" />
+                                </VBox>
+                            </HBox>
+
+                            <VBox spacing="6.0">
+                                <Label styleClass="form-label" text="CAMBIAR ESTADO DE LA FUNCIÓN SELECCIONADA" />
+                                <HBox spacing="8.0">
+                                    <ComboBox fx:id="cbNuevoEstado" maxWidth="Infinity" promptText="Seleccionar estado" styleClass="compra-combo" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="btnCambiarEstado" mnemonicParsing="false" onAction="#cambiarEstado" style="-fx-padding: 10 14;" styleClass="btn-acento" text="APLICAR" />
+                                </HBox>
+                            </VBox>
+
+                            <HBox alignment="CENTER" spacing="15.0">
+                                <Button fx:id="btnCrear" mnemonicParsing="false" onAction="#crearFuncion" style="-fx-padding: 10 14;" styleClass="btn-primary" text="CREAR" />
+                                <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarFuncion" style="-fx-padding: 10 14;" styleClass="btn-acento" text="ACTUALIZAR" />
+                                <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarFuncion" style="-fx-padding: 10 14;" styleClass="btn-ghost" text="ELIMINAR" />
+                                <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#limpiarFormulario" style="-fx-padding: 10 14;" styleClass="btn-ghost" text="LIMPIAR" />
+                            </HBox>
+
+                            <Label fx:id="lblMensaje" styleClass="mensaje-exito" wrapText="true" />
+
+                        </VBox>
+
+                        <VBox maxHeight="180.0" minHeight="180.0" prefHeight="180.0" prefWidth="400.0" spacing="12.0" styleClass="cartelera-card" VBox.vgrow="ALWAYS">
+
+                            <Label style="-fx-font-size: 20;" styleClass="titulo-grande" text="Resumen de la función" />
+
+                            <HBox spacing="20.0">
+                                <VBox prefHeight="45.0" prefWidth="98.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="PRECIO POR ENTRADA" />
+                                    <Label fx:id="lblPrecio" style="-fx-font-size: 18;" styleClass="combo-precio" text="-" />
+                                </VBox>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="ENTRADAS VENDIDAS" />
+                                    <Label fx:id="lblEntradas" style="-fx-font-size: 18;" styleClass="combo-precio" text="-" />
+                                </VBox>
+                            </HBox>
+
+                            <HBox spacing="20.0">
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="FINALIZA" />
+                                    <Label fx:id="lblFin" style="-fx-font-size: 18;" styleClass="combo-precio" text="-" />
+                                </VBox>
+                                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="form-label" text="ESTADO ACTUAL" />
+                                    <Label fx:id="lblEstado" style="-fx-font-size: 18;" styleClass="combo-precio" text="-" />
+                                </VBox>
+                            </HBox>
+
+                            <Label fx:id="lblRestriccion" styleClass="texto-sec" wrapText="true" />
+
+                        </VBox>
+
+                    </VBox>
+
+                    <VBox spacing="10.0" styleClass="cartelera-card" HBox.hgrow="ALWAYS">
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label style="-fx-font-size: 23;" styleClass="titulo-grande" text="Funciones registradas" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label styleClass="form-label" text="ESTADO" />
+                            <ComboBox fx:id="cbFiltroEstado" prefWidth="160.0" promptText="Todos" styleClass="compra-combo" />
+                        </HBox>
+
+                        <TableView fx:id="tablaFunciones" VBox.vgrow="ALWAYS">
+
+                            <columns>
+                                <TableColumn fx:id="colCodigo" text="Código" />
+                                <TableColumn fx:id="colPelicula" text="Película" />
+                                <TableColumn fx:id="colSala" text="Sala" />
+                                <TableColumn fx:id="colFecha" text="Fecha y hora" />
+                                <TableColumn fx:id="colFormato" text="Formato" />
+                                <TableColumn fx:id="colPrecio" text="Precio" />
+                                <TableColumn fx:id="colEstado" text="Estado" />
+                            </columns>
+
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+
+                            <placeholder>
+                                <Label styleClass="texto-sec" text="No hay funciones para mostrar." />
+                            </placeholder>
+
+                        </TableView>
+
+                    </VBox>
+
+                </HBox>
+
+            </children>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

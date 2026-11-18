@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -11,7 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
+
+import org.example.model.usuarios.Administrador;
+import org.example.services.SesionActual;
 
 import java.io.IOException;
 
@@ -56,7 +59,11 @@ public class PanelAdministradorViewController {
     @FXML
     private Button btnCerrarSesion;
 
+    private static final String RUTA_VISTAS = "/org.example/";
+
     private ToggleGroup grupoMenu;
+
+    private Administrador administradorActual;
 
     @FXML
     private void initialize() {
@@ -73,67 +80,93 @@ public class PanelAdministradorViewController {
         btnRecargas.setToggleGroup(grupoMenu);
         btnReportes.setToggleGroup(grupoMenu);
 
-        lblBienvenida.setText("BIENVENIDO");
+        administradorActual = SesionActual.getInstance().getAdministradorActual();
 
+        if (administradorActual != null) {
+            lblBienvenida.setText(
+                    "BIENVENIDO/A, " + administradorActual.getNombre().toUpperCase()
+            );
+        } else {
+            lblBienvenida.setText("BIENVENIDO/A, ADMINISTRADOR");
+        }
     }
 
     @FXML
     private void mostrarPeliculas() {
-        mostrarSeccion("PELÍCULAS",
-                "Administra la información de las películas de CinemaUQ.");
+        cargarVista("adminPeliculas.fxml");
     }
 
     @FXML
     private void mostrarSalas() {
-        mostrarSeccion("SALAS Y ASIENTOS",
-                "Gestiona las salas, su distribución y los tipos de asientos.");
+        cargarVista("salas.fxml");
     }
 
     @FXML
     private void mostrarFunciones() {
-        mostrarSeccion("FUNCIONES",
-                "Programa, consulta y administra las funciones del cine.");
+        cargarVista("adminFunciones.fxml");
     }
 
     @FXML
     private void mostrarProductos() {
-        mostrarSeccion("PRODUCTOS Y COMBOS",
-                "Administra los productos y combos disponibles en confitería.");
+        cargarVista("adminConfiteria.fxml");
     }
 
     @FXML
     private void mostrarPromociones() {
-        mostrarSeccion("PROMOCIONES",
-                "Crea y administra las promociones y descuentos de CinemaUQ.");
+        cargarVista("adminPromociones.fxml");
     }
 
     @FXML
     private void mostrarClientes() {
-        mostrarSeccion("CLIENTES",
-                "Consulta la información de los clientes registrados.");
+        cargarVista("adminCliente.fxml");
     }
 
     @FXML
     private void mostrarCompras() {
-        mostrarSeccion("COMPRAS",
-                "Consulta las compras y gestiona las solicitudes de cancelación.");
+        cargarVista("adminCompras.fxml");
     }
 
     @FXML
     private void mostrarRecargas() {
-        mostrarSeccion("RECARGAS",
-                "Gestiona las solicitudes de recarga de las tarjetas virtuales.");
+        cargarVista("adminRecargas.fxml");
     }
 
     @FXML
     private void mostrarReportes() {
-        mostrarSeccion("REPORTES",
-                "Consulta y exporta los reportes del funcionamiento del cine.");
+        cargarVista("adminReportes.fxml");
+    }
+
+    private FXMLLoader cargarVista(String fxml) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(RUTA_VISTAS + fxml)
+            );
+
+            Parent vista = loader.load();
+
+            contenidoDinamico.getChildren().setAll(vista);
+
+            return loader;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+            mostrarSeccion(
+                    "ERROR",
+                    "No fue posible cargar la sección solicitada."
+            );
+
+            return null;
+        }
     }
 
     private void mostrarSeccion(String titulo, String descripcion) {
 
         VBox contenido = new VBox(20);
+
         contenido.setAlignment(Pos.CENTER);
 
         Label lblTitulo = new Label(titulo);
@@ -144,7 +177,10 @@ public class PanelAdministradorViewController {
         lblDescripcion.setWrapText(true);
         lblDescripcion.setMaxWidth(600);
 
-        contenido.getChildren().addAll(lblTitulo, lblDescripcion);
+        contenido.getChildren().addAll(
+                lblTitulo,
+                lblDescripcion
+        );
 
         contenidoDinamico.getChildren().setAll(contenido);
     }
@@ -153,9 +189,14 @@ public class PanelAdministradorViewController {
     private void cerrarSesion() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/bienvenida.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(RUTA_VISTAS + "bienvenida.fxml")
+            );
 
             Parent root = loader.load();
+
+            SesionActual.getInstance().cerrarSesion();
 
             Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
 
