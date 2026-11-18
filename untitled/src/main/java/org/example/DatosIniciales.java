@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.model.Cine;
 import org.example.model.consumibleComposite.Combo;
 import org.example.model.consumibleComposite.Producto;
@@ -23,6 +24,8 @@ import org.example.model.consumibleComposite.Consumible;
 import org.example.model.tarjeta.TarjetaVirtual;
 import org.example.model.compra.estadoCompra.EstadoPagada;
 import org.example.model.compra.estadoCompra.EstadoReembolsada;
+import org.example.model.promocion.Promocion;
+import org.example.model.promocion.TipoPromocion;
 import org.example.model.usuarios.Administrador;
 
 import java.time.LocalDate;
@@ -39,6 +42,7 @@ public class DatosIniciales {
         inicializarPeliculas(cine);
         inicializarSalas(cine);
         inicializarFunciones(cine);
+        inicializarPromociones(cine);
     }
 
     private static void inicializarPeliculas(Cine cine) {
@@ -610,6 +614,13 @@ public class DatosIniciales {
 
         if (estado instanceof EstadoPagada) {
             compra.pagar();
+            for (Ticket ticket : compra.getListaTickets()) {
+                try {
+                    funcion.ocuparAsiento(ticket.getCodigoAsiento());
+                } catch (AsientoNoDisponibleException e) {
+                    System.err.println("Datos iniciales: " + e.getMessage());
+                }
+            }
         } else if (estado != null) {
             compra.cambiarEstado(estado);
         }
@@ -672,16 +683,12 @@ public class DatosIniciales {
         Cine cine = Cine.getInstance();
 
         for (Cliente cliente : cine.getListClientes()) {
-
-            int puntosAcumulados = 0;
-
+            cliente.getHistorialPuntos().clear();
             for (Compra compra : cliente.getListCompras()) {
-
                 if (compra.getTheEstadoCompra() instanceof EstadoPagada) {
-                    puntosAcumulados += compra.getPuntosCompra();
+                    cliente.agregarPuntos(compra.getPuntosCompra(), compra.getFechaCompra(), compra.getCodigo());
                 }
             }
-            cliente.setPuntos(puntosAcumulados);
         }
     }
 
@@ -699,5 +706,43 @@ public class DatosIniciales {
         );
 
         cine.crearAdministrador(administrador);
+    }
+
+    private static void inicializarPromociones(Cine cine) {
+        if (!cine.getListPromociones().isEmpty()) {
+            return;
+        }
+
+        LocalDate hoy = LocalDate.now();
+
+        cine.crearPromocion(new Promocion(
+                "Martes y Jueves de Cine",
+                "Descuento especial entre semana en boleteria general",
+                TipoPromocion.ENTRADAS,
+                40,
+                hoy.minusMonths(1),
+                hoy.plusMonths(6),
+                true
+        ));
+
+        cine.crearPromocion(new Promocion(
+                "Combo Amigo 15%",
+                "Descuento en combos seleccionados de confiteria",
+                TipoPromocion.CONFITERIA,
+                15,
+                hoy.minusDays(15),
+                hoy.plusMonths(3),
+                true
+        ));
+
+        cine.crearPromocion(new Promocion(
+                "Estreno Fin de Semana",
+                "Promocion sobre compra completa con entradas y confiteria",
+                TipoPromocion.COMPRA_TOTAL,
+                10,
+                hoy.minusDays(5),
+                hoy.plusMonths(2),
+                true
+        ));
     }
 }

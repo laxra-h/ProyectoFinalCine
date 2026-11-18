@@ -1,13 +1,12 @@
 package org.example.model.compra.estadoCompra;
 
-import org.example.model.Ticket;
 import org.example.model.compra.Compra;
 import org.example.model.usuarios.Cliente;
 
 public class EstadoPendiente implements EstadoCompra {
 
     /**
-     * Metodo para pasar la compra de pendiente a pagada y suscribir/notificar al cliente
+     * Metodo para pasar la compra de pendiente a pagada y notificar al cliente
      * @param compra
      */
     @Override
@@ -16,13 +15,6 @@ public class EstadoPendiente implements EstadoCompra {
 
         Cliente cliente = compra.getTheCliente();
         if (cliente != null) {
-            if (compra.getListaTickets() != null) {
-                for (Ticket ticket : compra.getListaTickets()) {
-                    if (ticket.getTheFuncion() != null) {
-                        ticket.getTheFuncion().agregarObservador(cliente);
-                    }
-                }
-            }
             cliente.actualizar("Compra " + compra.getCodigo() + " pagada exitosamente.");
         }
     }

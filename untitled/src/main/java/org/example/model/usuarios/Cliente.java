@@ -6,6 +6,7 @@ import org.example.model.tarjeta.TarjetaVirtual;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -13,6 +14,7 @@ public class Cliente extends Usuario implements Observador {
 
     private LocalDate fechaNacimiento;
     private int puntos;
+    private List<RegistroPuntos> historialPuntos;
     private TarjetaVirtual theTarjeta;
     private List<String> listNotificaciones;
     private List<Compra> listCompras;
@@ -26,6 +28,10 @@ public class Cliente extends Usuario implements Observador {
         super(builder.id, builder.nombre, builder.telefono, builder.email, builder.contrasenia);
         this.fechaNacimiento = builder.fechaNacimiento;
         this.puntos = builder.puntos;
+        this.historialPuntos = new ArrayList<>();
+        if (builder.puntos > 0) {
+            this.historialPuntos.add(new RegistroPuntos(builder.puntos, LocalDate.now(), "INICIAL"));
+        }
         this.theTarjeta = new TarjetaVirtual(id, 0);
         this.listNotificaciones = new ArrayList<>();
         this.listCompras = new ArrayList<>();
@@ -106,12 +112,114 @@ public class Cliente extends Usuario implements Observador {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * Metodo para obtener los puntos vigentes disponibles del cliente
+     * @return
+     */
     public int getPuntos() {
-        return puntos;
+        return getPuntos(LocalDate.now());
+    }
+
+    /**
+     * Metodo para obtener los puntos vigentes disponibles en una fecha dada
+     * @param fecha
+     * @return
+     */
+    public int getPuntos(LocalDate fecha) {
+        int total = 0;
+        for (RegistroPuntos registro : historialPuntos) {
+            if (registro.estaVigente(fecha)) {
+                total += registro.getPuntosDisponibles();
+            }
+        }
+        this.puntos = total;
+        return total;
+    }
+
+    /**
+     * Metodo para registrar puntos acumulados con su fecha de obtencion y vigencia de un ano
+     * @param cantidad
+     * @param fechaObtencion
+     * @param codigoCompra
+     */
+    public void agregarPuntos(int cantidad, LocalDate fechaObtencion, String codigoCompra) {
+        if (cantidad <= 0) {
+            return;
+        }
+        historialPuntos.add(new RegistroPuntos(cantidad, fechaObtencion, codigoCompra));
+        this.puntos = getPuntos();
+    }
+
+    /**
+     * Metodo para redimir puntos usando primero los mas proximos a vencer e impidiendo usar vencidos
+     * @param cantidad
+     * @return
+     */
+    public boolean redimirPuntos(int cantidad) {
+        return redimirPuntos(cantidad, LocalDate.now());
+    }
+
+    /**
+     * Metodo para redimir puntos en una fecha dada usando primero los mas proximos a vencer
+     * @param cantidad
+     * @param fecha
+     * @return
+     */
+    public boolean redimirPuntos(int cantidad, LocalDate fecha) {
+        if (cantidad <= 0) {
+            return true;
+        }
+        if (getPuntos(fecha) < cantidad) {
+            return false;
+        }
+
+        List<RegistroPuntos> vigentes = new ArrayList<>();
+        for (RegistroPuntos registro : historialPuntos) {
+            if (registro.estaVigente(fecha) && registro.getPuntosDisponibles() > 0) {
+                vigentes.add(registro);
+            }
+        }
+        vigentes.sort(Comparator.comparing(RegistroPuntos::getFechaVencimiento));
+
+        int restante = cantidad;
+        for (RegistroPuntos registro : vigentes) {
+            if (restante <= 0) {
+                break;
+            }
+            restante -= registro.consumir(restante);
+        }
+        this.puntos = getPuntos(fecha);
+        return true;
+    }
+
+    /**
+     * Metodo para revertir los puntos de una compra cancelada
+     * @param puntosUsados
+     * @param puntosGanados
+     * @param codigoCompra
+     */
+    public void reembolsarPuntosCompra(int puntosUsados, int puntosGanados, String codigoCompra) {
+        if (codigoCompra != null) {
+            historialPuntos.removeIf(r -> codigoCompra.equals(r.getCodigoCompra()));
+        } else if (puntosGanados > 0) {
+            redimirPuntos(Math.min(puntosGanados, getPuntos()));
+        }
+        if (puntosUsados > 0) {
+            historialPuntos.add(new RegistroPuntos(puntosUsados, LocalDate.now(), "REEMBOLSO-" + codigoCompra));
+        }
+        this.puntos = getPuntos();
     }
 
     public void setPuntos(int puntos) {
-        this.puntos = puntos;
+        this.historialPuntos.clear();
+        if (puntos > 0) {
+            this.historialPuntos.add(new RegistroPuntos(puntos, LocalDate.now(), "AJUSTE"));
+        }
+        this.puntos = Math.max(0, puntos);
+    }
+
+    public List<RegistroPuntos> getHistorialPuntos() {
+        return historialPuntos;
     }
 
     public TarjetaVirtual getTheTarjeta() {

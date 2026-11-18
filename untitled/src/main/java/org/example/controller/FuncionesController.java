@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.exceptions.CancelacionNoPermitidaException;
 import org.example.model.Cine;
 import org.example.model.Ticket;
 import org.example.model.compra.Compra;
@@ -240,8 +241,11 @@ public class FuncionesController {
                     if ("PAGADA".equals(compra.getTheEstadoCompra().getNombre())) {
                         compra.setTheEstrategiaReembolso(new ReembolsoCompleto());
                     }
-                    compra.cancelar();
-                    comprasProcesadas++;
+                    try {
+                        compra.cancelar();
+                        comprasProcesadas++;
+                    } catch (CancelacionNoPermitidaException ignored) {
+                    }
                 }
             }
 

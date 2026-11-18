@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
 import org.example.model.salaPrototype.Asiento;
@@ -43,6 +44,28 @@ public interface Funcion {
     public void notificar(String mensaje);
 
     public int getPuntosRedmidos();
+
+    public Asiento[] getAsientos();
+
+    /**
+     * Metodo para verificar si un asiento esta disponible
+     * @param codigoAsiento
+     * @return
+     */
+    public boolean asientoDisponible(String codigoAsiento);
+
+    /**
+     * Metodo para ocupar un asiento de la funcion
+     * @param codigoAsiento
+     * @throws AsientoNoDisponibleException
+     */
+    public void ocuparAsiento(String codigoAsiento) throws AsientoNoDisponibleException;
+
+    /**
+     * Metodo para liberar un asiento de la funcion
+     * @param codigoAsiento
+     */
+    public void liberarAsiento(String codigoAsiento);
 
 
     public List<Observador> getListObservadores();

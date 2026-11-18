@@ -1,5 +1,6 @@
 package org.example.model.funcionDecorator;
 
+import org.example.exceptions.AsientoNoDisponibleException;
 import org.example.model.Ticket;
 import org.example.model.observer.Observador;
 import org.example.model.pelicula.Pelicula;
@@ -21,8 +22,10 @@ public class FuncionBase implements Funcion {
     private LocalDateTime fecha;
     private final int DESCUENTO_SEMANA = 40;
     private final double COSTO = 20000;
+    public static final int VALOR_PUNTO = 200;
     private int puntosRedimidos;
     private EstadoFuncion estado;
+    private Asiento[] asientos;
     private List<Ticket> listaTickets;
     private List<Observador> listObservadores;
 
@@ -52,10 +55,12 @@ public class FuncionBase implements Funcion {
     public FuncionBase(String codigo, Pelicula pelicula, Sala sala, LocalDateTime fecha, EstadoFuncion estado) {
         this.codigo = codigo;
         this.pelicula = pelicula;
-        this.sala = sala;
         this.fecha = fecha;
         this.estado = estado;
+        this.listaTickets = new ArrayList<>();
         this.listObservadores = new ArrayList<>();
+        setSala(sala);
+        this.puntosRedimidos = (int) (calcularCosto() / VALOR_PUNTO);
     }
 
 
@@ -83,13 +88,65 @@ public class FuncionBase implements Funcion {
     }
 
     /**
-     * Metodo para resetear los asientos
+     * Metodo para resetear los asientos de la funcion
      */
     public void resetAsientos() {
-
-            for (Asiento asiento : sala.getListAsientos()) {
+        if (asientos == null) {
+            return;
+        }
+        for (Asiento asiento : asientos) {
+            if (asiento != null) {
                 asiento.setDisponible(true);
             }
+        }
+    }
+
+    /**
+     * Metodo para buscar un asiento de la funcion por su codigo
+     * @param codigoAsiento
+     * @return
+     */
+    private Asiento buscarAsiento(String codigoAsiento) {
+        if (asientos == null || codigoAsiento == null) {
+            return null;
+        }
+        for (Asiento asiento : asientos) {
+            if (asiento != null && asiento.getCodigo().equals(codigoAsiento)) {
+                return asiento;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Asiento[] getAsientos() {
+        return asientos;
+    }
+
+    @Override
+    public boolean asientoDisponible(String codigoAsiento) {
+        Asiento asiento = buscarAsiento(codigoAsiento);
+        return asiento != null && asiento.isDisponible();
+    }
+
+    @Override
+    public void ocuparAsiento(String codigoAsiento) throws AsientoNoDisponibleException {
+        Asiento asiento = buscarAsiento(codigoAsiento);
+        if (asiento == null) {
+            throw new AsientoNoDisponibleException("El asiento " + codigoAsiento + " no existe en la función " + codigo);
+        }
+        if (!asiento.isDisponible()) {
+            throw new AsientoNoDisponibleException("El asiento " + codigoAsiento + " ya fue vendido para la función " + codigo);
+        }
+        asiento.setDisponible(false);
+    }
+
+    @Override
+    public void liberarAsiento(String codigoAsiento) {
+        Asiento asiento = buscarAsiento(codigoAsiento);
+        if (asiento != null) {
+            asiento.setDisponible(true);
+        }
     }
 
     /**
@@ -177,6 +234,7 @@ public class FuncionBase implements Funcion {
 
     public void setSala(Sala sala) {
         this.sala = sala;
+        this.asientos = (sala != null && sala.getListAsientos() != null) ? sala.clonarAsientos() : null;
     }
 
 
@@ -202,7 +260,7 @@ public class FuncionBase implements Funcion {
 
     public void setEstado(EstadoFuncion estado) {
         this.estado = estado;
-        if (estado == EstadoFuncion.FINALIZADA && sala != null && sala.getListAsientos() != null) {
+        if (estado == EstadoFuncion.FINALIZADA) {
             resetAsientos();
         }
         notificar();
